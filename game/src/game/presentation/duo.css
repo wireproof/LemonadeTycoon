@@ -1,0 +1,64 @@
+/* Touch-first presentation; classic palette and complete 5:4 scene preserved. */
+.duo { background: #164c26; font-size: 15px; -webkit-text-size-adjust: 100%; }
+.duo body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.duo #app { width: 100%; max-width: 1360px; margin: 0 auto; padding: 8px; }
+.duo button, .duo select { touch-action: manipulation; min-height: 44px; }
+.duo input, .duo select { font-size: 16px; }
+.duo .masthead { margin: -8px -8px 6px; height: 32px; padding: 4px 9px; }
+.duo h1 { font-size: 18px; }
+.duo .edition { font-size: 10px; }
+.duo .resource-bar { height: 46px; gap: 12px; justify-content: space-between; }
+.duo .toolbar { flex-wrap: wrap; gap: 4px; }
+.duo .toolbar button { min-height: 58px; font-size: 12px; flex: 1 0 22%; width: auto; }
+.duo .toolbar .pixel-icon, .duo .toolbar .staff-portrait { width: 26px; height: 26px; }
+.duo .panel { min-height: 0; padding: 12px; }
+.duo .spinner button, .duo .bundle-row .spinner button { width: 44px; min-width: 44px; height: 44px; }
+.duo .spinner input { width: 52px; height: 44px; }
+.duo .bundle-row { grid-template-columns: 1fr 44px 136px; }
+.duo .recipe-row label span { display: inline; }
+.duo .primary { min-height: 50px; }
+.duo .forecast { min-height: 104px; }
+.duo .control-row { grid-template-columns: 1fr; gap: 7px; }
+.duo .toolbar { order: 2; }
+.duo .forecast { grid-template-columns: 1fr 1fr; }
+.duo .world-frame { min-height: 0; }
+.duo .scene-window { position: relative; }
+.duo .text-button { min-height: 44px; font-size: 13px; }
+.duo .catalog-navigation button { min-height: 44px; min-width: 44px; }
+.duo .duo-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; width: 100%; }
+.duo-controls select { background: #d8e8a7; color: #193b20; border: 1px solid #436632; padding: 6px; }
+.duo #fullscreen, .duo #menu-quit { display: none; }
+.duo footer { flex-wrap: wrap; }
+.duo[data-display="cover"] .layout { display: flex; flex-direction: column; }
+.duo[data-display="cover"] .management-column, .duo[data-display="cover"] .world-column { width: 100%; }
+.duo[data-display="cover"] .world-column { order: -1; }
+.duo[data-display="cover"] .world-frame { max-width: 520px; margin: auto; }
+.duo[data-display="cover"] .location-description { display: none; }
+.duo[data-display="cover"] .daily-strip { margin-top: 8px; }
+.duo[data-display="cover"] .report-content { grid-template-columns: 1fr; }
+.duo[data-display="inner"] .layout { display: grid; grid-template-columns: minmax(300px, .92fr) minmax(300px, 1.08fr); }
+.duo[data-display="inner"] .world-column { grid-row: auto; position: sticky; top: 8px; }
+.duo[data-display="inner"] .control-row { grid-template-columns: .92fr 1.08fr; }
+.duo[data-display="inner"] .toolbar { order: 0; }
+.duo #menu-import { order: 9; }
+@media(max-width: 679px) { .duo[data-display="inner"] .layout { grid-template-columns: minmax(0,1fr); } .duo[data-display="inner"] .control-row { grid-template-columns: 1fr; } }
+.duo[data-display="cover"] .world-frame { max-width: 390px; }
+.duo[data-display="cover"] .scene-window { max-width: 310px; margin: auto; }
+.duo[data-display="cover"] .toolbar { position: sticky; top: 0; z-index: 4; background: #16812b; padding: 4px 0; }
+/* Cover keeps navigation within thumb reach while the work area scrolls independently. */
+.duo[data-display="cover"] #app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.duo[data-display="cover"] .masthead, .duo[data-display="cover"] .resource-bar, .duo[data-display="cover"] .control-row, .duo[data-display="cover"] #app > .toolbar, .duo[data-display="cover"] footer { flex-shrink: 0; }
+.duo[data-display="cover"] .layout { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior-y: contain; }
+.duo[data-display="cover"] #app > .toolbar { position: static; display: flex; padding: 5px 0 0; }
+.duo[data-display="cover"] #app > .toolbar button { min-height: 48px; }
+.duo[data-display="cover"] #app > .toolbar .pixel-icon, .duo[data-display="cover"] #app > .toolbar .staff-portrait { width: 20px; height: 20px; }
+.duo[data-display="cover"] footer { max-height: 52px; overflow-y: auto; margin-top: 4px; }
+.duo[data-display="cover"] .forecast { min-height: 84px; }
+.duo[data-display="cover"] .control-row { margin: 4px 0; }
+.duo[data-display="cover"] .world-column { flex-shrink: 0; }
+.duo[data-display="cover"] .management-column { flex-shrink: 0; }
+.duo-more { display: none; }
+.duo[data-display="cover"] .duo-more { display: block; width: 100%; }
+.duo[data-display="cover"] footer:not(.expanded) > :not(.duo-more) { display: none; }
+.duo[data-display="cover"] footer.expanded { max-height: 35dvh; }
+

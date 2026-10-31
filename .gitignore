@@ -1,0 +1,6 @@
+node_modules/
+dist/
+build/
+*.ipa
+*.mobileprovision
+.DS_Store

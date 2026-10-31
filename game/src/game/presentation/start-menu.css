@@ -1,0 +1,49 @@
+#start-menu { position:fixed; inset:0; z-index:20; overflow:auto; color:#fffbdc; background:radial-gradient(ellipse at top,#337b35,#0c3826 85%); font:15px -apple-system,BlinkMacSystemFont,Arial,sans-serif; }
+#start-menu * { box-sizing:border-box; }
+#start-menu [hidden] { display:none!important; }
+#start-menu .start-frame { width:min(100%,900px); min-height:100%; margin:auto; padding: max(12px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)); display:flex; flex-direction:column; gap:14px; }
+#start-menu button { font:inherit; cursor:pointer; border:1px solid #ffffff38; border-radius:14px; min-height:44px; color:inherit; background:#ffffff12; padding:10px 14px; }
+#start-menu button:focus-visible,#start-menu summary:focus-visible { outline:3px solid #ffdf62; outline-offset:3px; }
+#start-menu button:disabled { opacity:.45; cursor:default; }
+#start-menu .lobby-header { text-align:center; }
+#start-menu .original-logo { width:260px; max-width:90%; height:70px; object-fit:contain; }
+#start-menu .lobby-header p { margin:2px 0 0; font-size:9px; letter-spacing:2px; color:#c3dcb8; }
+#start-menu .lobby-main { display:grid; gap:12px; }
+#start-menu .lobby-resume { background:#072c2080; border:1px solid #a7d57645; border-radius:20px; padding:16px; }
+#start-menu .menu-selection-label { margin:0 0 4px; font-size:10px; letter-spacing:1.6px; color:#b6d78f; }
+#start-menu h2 { font-size:23px; margin:0 0 10px; }
+#start-menu .menu-summary { line-height:1.35; margin-bottom:12px; }
+#start-menu .menu-company-name { display:block; font-weight:600; font-size:16px; overflow-wrap:anywhere; }
+#start-menu .menu-save-details { display:block; white-space:pre-line; font-size:12px; line-height:1.5; color:#cde0bb; }
+#start-menu .lobby-continue { display:flex; align-items:center; gap:12px; width:100%; min-height:56px; color:#183d24; background:linear-gradient(#ffe781,#edbd39); border-color:#fff3a4; font-weight:750; box-shadow:0 5px 16px #0002; }
+#start-menu .lobby-continue b { margin-left:auto; font-size:23px; }
+#start-menu .pixel-icon { width:26px; height:26px; flex-shrink:0; }
+#start-menu #menu-status { margin:9px 0 0; font-size:11px; line-height:1.4; color:#bad7ac; }
+#start-menu .lobby-start { display:grid; gap:9px; }
+#start-menu .mode-card { display:flex; align-items:center; text-align:left; gap:12px; min-height:68px; background:#487a3c60; }
+#start-menu .mode-card span { flex:1; }
+#start-menu .mode-card strong,#start-menu .mode-card small { display:block; }
+#start-menu .mode-card small { margin-top:4px; font-size:11px; color:#c7dbb8; }
+#start-menu .mode-card b { font-size:23px; color:#e9d66a; }
+#start-menu .lobby-saves summary { min-height:44px; padding:12px 4px; cursor:pointer; font-size:13px; }
+#start-menu .lobby-saves summary span { float:right; color:#a6c591; font-size:11px; }
+#start-menu .company-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#start-menu .company-list button { position:relative; text-align:left; padding:12px 8px 12px 28px; min-height:66px; min-width:0; }
+#start-menu .company-list button[aria-pressed=true] { background:#f0d65a; color:#193d24; border-color:#fff1a3; }
+#start-menu .company-slot { position:absolute; left:10px; top:14px; font-size:12px; opacity:.7; }
+#start-menu .company-name { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; font-size:13px; }
+#start-menu .company-summary { display:block; font-size:10px; margin-top:4px; }
+#start-menu .lobby-footer { margin-top:auto; }
+#start-menu .lobby-footer nav { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
+#start-menu .lobby-footer button { display:flex; flex-direction:column; align-items:center; gap:5px; padding:9px 3px; font-size:11px; }
+#start-menu .lobby-footer p { text-align:center; font-size:9px; letter-spacing:2px; color:#87ae83; margin:10px 0 0; }
+#start-menu #menu-create label { display:block; font-size:13px; margin:10px 0; }
+#start-menu #menu-name { width:100%; min-height:48px; border-radius:10px; border:1px solid #b7cf98; background:#fffce6; color:#143c24; font:16px -apple-system,Arial,sans-serif; padding:10px; text-align:left; }
+#start-menu #menu-replace { width:24px; height:24px; vertical-align:middle; margin-right:8px; }
+#start-menu #menu-create p { font-size:12px; color:#c7dbb8; }
+#start-menu .create-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+#start-menu .create-actions button[type=submit] { background:#f1d35d; color:#183d24; }
+#start-menu dialog { max-width:min(90vw,560px); max-height:80dvh; overflow:auto; border-radius:20px; padding:24px; background:#153f2c; color:#fffbdc; border:1px solid #a4be76; }
+#start-menu dialog::backdrop { background:#0009; }
+@media(min-width:680px) { #start-menu .start-frame { padding:28px; gap:24px; } #start-menu .original-logo { width:340px; height:90px; } #start-menu .lobby-main { grid-template-columns:1.2fr 1fr; gap:18px; } #start-menu .lobby-start { align-content:center; } #start-menu .lobby-saves { grid-column:1/-1; } #start-menu .company-list { grid-template-columns:repeat(4,minmax(0,1fr)); } #start-menu .lobby-footer nav { max-width:500px; margin:auto; } }
+#start-menu .lobby-footer { display:block; margin-top:0; }
