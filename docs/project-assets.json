@@ -1,0 +1,402 @@
+[
+  {
+    "path": "game/public/assets/audio/bgm.mp3",
+    "bytes": 1032044,
+    "sha256": "ade9cd67ff3bc4db6e9fc2ddf705a218d73f3e17d1892a005566bedff3f68bfe"
+  },
+  {
+    "path": "game/public/assets/bg.png",
+    "bytes": 302554,
+    "sha256": "868de612a0040e2a25e14f8b983d1c9fc96f0ac8cc6ed93dba9a74366b6c82e1"
+  },
+  {
+    "path": "game/public/assets/characters/characters.png",
+    "bytes": 28346,
+    "sha256": "49c0f57970c14a296df48c1fa38c7060c4469724826f5ad1165e13f2273564b9"
+  },
+  {
+    "path": "game/public/assets/cloudy-24.png",
+    "bytes": 726,
+    "sha256": "6a13be8b3adfce5419a17576b2fcf0bd334b367669753fc5729cbc1f005b6594"
+  },
+  {
+    "path": "game/public/assets/cup-16.png",
+    "bytes": 565,
+    "sha256": "5bd4d1d803ce63e31307d54f56e6b5e66f520c7ad9aa67ed70fac56308d7316f"
+  },
+  {
+    "path": "game/public/assets/cup-32.png",
+    "bytes": 1044,
+    "sha256": "5f416479af455bbd96d56d7a9d21c875b11800eb46f1cc0f0a62a4d1626460e5"
+  },
+  {
+    "path": "game/public/assets/ice-32.png",
+    "bytes": 2041,
+    "sha256": "2c157d531e2dfa3087108d2b2bc26925826c8966435d7062948fea9fd38b2f6d"
+  },
+  {
+    "path": "game/public/assets/lemon-32.png",
+    "bytes": 1830,
+    "sha256": "244db1109c10fab4d1cccdc38bf50369c271a021b56ecb38e6ff3d6e88163554"
+  },
+  {
+    "path": "game/public/assets/lemonade-pitcher-32.png",
+    "bytes": 2019,
+    "sha256": "192fbbdcf14e6ccc67fe99ec4dd2df6d2e011568049079f23cfa93ab2ee4ef66"
+  },
+  {
+    "path": "game/public/assets/lemonade-tycoon-thumbnail-black.png",
+    "bytes": 48557,
+    "sha256": "7eafa9bbc27d28b666c8b490d6fb92ad14315439f0706e114bc7123385e2e34e"
+  },
+  {
+    "path": "game/public/assets/little-cloudy-24.png",
+    "bytes": 1052,
+    "sha256": "cf0c2fe936724cd56eba7754b4a063907fb0c8d26210f33888344563a7209ec0"
+  },
+  {
+    "path": "game/public/assets/logo.png",
+    "bytes": 83365,
+    "sha256": "581dcaedcc9a1b4bcdabedaed692e562ba347e78c98bb82ca59af89b8d139b62"
+  },
+  {
+    "path": "game/public/assets/marketing-32.png",
+    "bytes": 1771,
+    "sha256": "575cb113ede367b569d4b2b3feb380b1dd162ee2057f5bb25f333f7e75d1a36c"
+  },
+  {
+    "path": "game/public/assets/minus.svg",
+    "bytes": 188,
+    "sha256": "c39f45570d71b2b8646ad20291e856b87ee3cf826c37b4bbaa3afe8c166282e8"
+  },
+  {
+    "path": "game/public/assets/night-24.png",
+    "bytes": 958,
+    "sha256": "b856bc77ad7e806c3730b3ebab5dbf8ee798707989a5ce661338c7b953cb4e26"
+  },
+  {
+    "path": "game/public/assets/plus.svg",
+    "bytes": 505,
+    "sha256": "02c3acf984f7311de981f87db07e0596002df9e6ea343c472bd6c7412fcbf1da"
+  },
+  {
+    "path": "game/public/assets/rainy-24.png",
+    "bytes": 1089,
+    "sha256": "cb384951edf7961bec560a7a1dceaad146d556b1c03afb7af62ef99cba87cf6a"
+  },
+  {
+    "path": "game/public/assets/recipe-16.png",
+    "bytes": 900,
+    "sha256": "3a203437c84d94d5873ffc64a211df6d30326b552249c94835f080a55edf3662"
+  },
+  {
+    "path": "game/public/assets/recipe-32.png",
+    "bytes": 2019,
+    "sha256": "192fbbdcf14e6ccc67fe99ec4dd2df6d2e011568049079f23cfa93ab2ee4ef66"
+  },
+  {
+    "path": "game/public/assets/rent-32.png",
+    "bytes": 2230,
+    "sha256": "817f67c94828cec01d5b16ac307ec2a5f912493b130caaf0ae5e002a6059fa48"
+  },
+  {
+    "path": "game/public/assets/results-32.png",
+    "bytes": 1677,
+    "sha256": "e90d10a459712bf55689c3a2319fc9df8ef4778f90aada5dff2df7c36c6ab47b"
+  },
+  {
+    "path": "game/public/assets/speaker-32.png",
+    "bytes": 531,
+    "sha256": "d8ae3ad19879c36695f44e025205a3dd230db327ddcce956c1112a6a0fb21d3e"
+  },
+  {
+    "path": "game/public/assets/speaker-mute-32.png",
+    "bytes": 410,
+    "sha256": "070a10bdfdeb54a771755161b5113d95afdc7af573abe641c3f4a70338c8104e"
+  },
+  {
+    "path": "game/public/assets/staff-32.png",
+    "bytes": 2631,
+    "sha256": "4f8a1cb3d056b51e0ad49efca3e1cb0245d4048901d63dc05a5641c752519b4b"
+  },
+  {
+    "path": "game/public/assets/star-16.png",
+    "bytes": 675,
+    "sha256": "8dccd2f49cc78303d18c14e710c529fd73e40698df4b7a7ca5c69252ce2e475f"
+  },
+  {
+    "path": "game/public/assets/star-32.png",
+    "bytes": 1284,
+    "sha256": "5b62227b3be26eb78973d7f158d169e6a1bb5eb77c45bbf157cda3a32b609ff6"
+  },
+  {
+    "path": "game/public/assets/star-empty-16.png",
+    "bytes": 405,
+    "sha256": "3f17b0498021bd9d33dd6a5f106f63e679268aa1ef5de7348675b6b901162671"
+  },
+  {
+    "path": "game/public/assets/star-empty-32.png",
+    "bytes": 796,
+    "sha256": "2c410ee4cfc6283023bb7237fcfcb3ba8254b6319d5a65ace10f2bed039165f6"
+  },
+  {
+    "path": "game/public/assets/sugar-32.png",
+    "bytes": 1634,
+    "sha256": "47c0e32ec3bac14081422197050c38b7ebd71a730405047f299b1939c8823a56"
+  },
+  {
+    "path": "game/public/assets/sunny-24.png",
+    "bytes": 706,
+    "sha256": "bb6beddaa3650ce43fce2f6d329d0dd8e37c2ad2d8ef4c846d4d902333f227f9"
+  },
+  {
+    "path": "game/public/assets/supplies-32.png",
+    "bytes": 2053,
+    "sha256": "f3b7b49b1c962be0e8c63d6a466a9ca75498b4afecaed256c2fce662aa9680da"
+  },
+  {
+    "path": "game/public/assets/tiles/park.json",
+    "bytes": 21360,
+    "sha256": "d97d6fa5ab429799edcc9f6206ad9e212bb87505ada3d7df0efd5c870eca8a38"
+  },
+  {
+    "path": "game/public/assets/tiles/park.tiled-project",
+    "bytes": 858,
+    "sha256": "0a26221f6ebba9ad84184e7403d5871563563484a53a0e8f6ce663bb3710836f"
+  },
+  {
+    "path": "game/public/assets/tiles/park.tiled-session",
+    "bytes": 1516,
+    "sha256": "d7f14cacd93b5ef9a1ab4e6b4d9683a7ba4eec2748be59d920aa0532ae668d82"
+  },
+  {
+    "path": "game/public/assets/tiles/park.tmx",
+    "bytes": 9163,
+    "sha256": "35b356698e99c502898fcb81895a7b289d468002960a68183a98a48db8943bbe"
+  },
+  {
+    "path": "game/public/assets/tiles/tilemap_packed.png",
+    "bytes": 23387,
+    "sha256": "e8b653bd3f32a537a2634eaa55d6abb97f20e09fd974bc1278a2ea55c1cda59f"
+  },
+  {
+    "path": "game/public/assets/upgrades-32.png",
+    "bytes": 1896,
+    "sha256": "d22710936e0ef1e4e6e3915f7797f3a9940e0ec93cccf5734b00d6a91ad48332"
+  },
+  {
+    "path": "game/public/favicon.png",
+    "bytes": 354,
+    "sha256": "1fa4c9d8f65746bbcc2df6ff66c5620f691250c6e4360e4a43b7393a9f8dabaa"
+  },
+  {
+    "path": "game/public/fonts/OFL-Oswald.txt",
+    "bytes": 4390,
+    "sha256": "0687c51a3126ae6963389181135a2eaea02f2e88f31230d27409952f28e84da5"
+  },
+  {
+    "path": "game/public/fonts/Oswald-wght.ttf",
+    "bytes": 172088,
+    "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+  },
+  {
+    "path": "game/public/style.css",
+    "bytes": 250,
+    "sha256": "9bfab015dfc27d439430b06dd23e39406cf35e0c60e243ee838bc774829dfbc6"
+  },
+  {
+    "path": "game/src/game/assets/equipment-blender-v1.png",
+    "bytes": 719859,
+    "sha256": "c7473bded9f7847913d9a0865b627407b11a85e3f89986dc21932fac7d4b315f"
+  },
+  {
+    "path": "game/src/game/assets/equipment-ice-maker-v1.png",
+    "bytes": 1044797,
+    "sha256": "6638a47e5c0fb759b372f08588917c6b6a56f963b86a9ebff7e7f58bc60edab7"
+  },
+  {
+    "path": "game/src/game/assets/equipment-refrigerator-v1.png",
+    "bytes": 910553,
+    "sha256": "0a2eed26aea869e1347b7844f39ab772b56f477e85bf3d56c570b5b342345c4e"
+  },
+  {
+    "path": "game/src/game/assets/map-beach.png",
+    "bytes": 2077552,
+    "sha256": "50ba922972e51c916aba63fc51a1b66d0a139f5199c02354fbf6a670cad5a108"
+  },
+  {
+    "path": "game/src/game/assets/map-downtown.png",
+    "bytes": 2126498,
+    "sha256": "5e80df505040ba203664a7badc755733cfb3b2f8f4b9852922f5bda3ec6ea100"
+  },
+  {
+    "path": "game/src/game/assets/map-magic-gardens.png",
+    "bytes": 2460966,
+    "sha256": "0a1002b2cb85d3a83c8fbc2cd258f9e50b59efa294072d81024afcc65094a7a9"
+  },
+  {
+    "path": "game/src/game/assets/map-mall.png",
+    "bytes": 2117111,
+    "sha256": "7436a8df0dee3aeed53d2f4ee43cfbc017b9a757813a8ca3b794de0c493400c6"
+  },
+  {
+    "path": "game/src/game/assets/map-marina.png",
+    "bytes": 2084430,
+    "sha256": "1b73bf366aac2e6a34b13ed6836588498edffcfc6e4cd446b258442dd1530ed8"
+  },
+  {
+    "path": "game/src/game/assets/map-neighborhood.png",
+    "bytes": 1889177,
+    "sha256": "a691cba1f26827d6f3a790349500bd072fa5ec470a4f27501160bdbf4f29f2ad"
+  },
+  {
+    "path": "game/src/game/assets/map-old-square.png",
+    "bytes": 2550320,
+    "sha256": "ca561596d716e5cacb936340cceca799119cc6d76f7cd4712758146ac3cfb9ae"
+  },
+  {
+    "path": "game/src/game/assets/map-park.png",
+    "bytes": 2167184,
+    "sha256": "aa8381b1671ec6dac848052d43f499608778f76b77d4c2894bb2a2252c8c42e6"
+  },
+  {
+    "path": "game/src/game/assets/map-stadium.png",
+    "bytes": 2482257,
+    "sha256": "b291e15a8c00778928b1b65d6fc5b5981161df60412d200359ebcdccc488fe11"
+  },
+  {
+    "path": "game/src/game/assets/map-train-station.png",
+    "bytes": 2087614,
+    "sha256": "a5b8d1b8ca5b77ed734820a35ada470411f821aac44366703c1053a912419aee"
+  },
+  {
+    "path": "game/src/game/assets/neighborhood-cottage.png",
+    "bytes": 959153,
+    "sha256": "ebf27386f7b780508b53c3e0c3457bc7172bf3dc5f71a299faa419da2f7badb3"
+  },
+  {
+    "path": "game/src/game/assets/neighborhood-hedge.png",
+    "bytes": 559666,
+    "sha256": "ddc616e72f08980c608b16273712d4a809d09d39ea0e69a07531da4d2bc25e20"
+  },
+  {
+    "path": "game/src/game/assets/neighborhood-house-left.png",
+    "bytes": 1018779,
+    "sha256": "ee6f1300942b6370c655886f750fafd250b47f40e14cd99bd39fc1406d82cfdf"
+  },
+  {
+    "path": "game/src/game/assets/neighborhood-tree.png",
+    "bytes": 605134,
+    "sha256": "a9a54f3357dd871e8b00634e8161c628899594cdd1d1e1231704d2efd0381ee9"
+  },
+  {
+    "path": "game/src/game/assets/original/beach.png",
+    "bytes": 41731,
+    "sha256": "55b03d3012060ad55c9de7730984611c6ef0d08675f1ec6501784ddc7764acfb"
+  },
+  {
+    "path": "game/src/game/assets/original/downtown.png",
+    "bytes": 7388,
+    "sha256": "6d7419d69801ec468c82429c54c9822092f4835f962149b662884908db24693a"
+  },
+  {
+    "path": "game/src/game/assets/original/logo.png",
+    "bytes": 6108,
+    "sha256": "5574f090ef02581de242ee300d1de98be4ccc81aeda74ea770b02fc785479393"
+  },
+  {
+    "path": "game/src/game/assets/original/mall.png",
+    "bytes": 20876,
+    "sha256": "cbcc3055bfab5bd02a4dc483b0da8ee40498f2bff669768a34cb41908ea9e5c2"
+  },
+  {
+    "path": "game/src/game/assets/original/neighborhood.png",
+    "bytes": 7611,
+    "sha256": "3599a0b08d7526e0f704d499f553a7f2b98acb950e7d8eb6cc54b9403b243b2e"
+  },
+  {
+    "path": "game/src/game/assets/original/park.png",
+    "bytes": 17370,
+    "sha256": "3329748a8884f0e32f283924359f14dce18e82f170580f3703a03fe623cfd164"
+  },
+  {
+    "path": "game/src/game/assets/staff-host-v1.png",
+    "bytes": 1252402,
+    "sha256": "00fcab0694bdf0df7ef03b32176f7358349bffc515e96253c0c02fc6c0b3e9d9"
+  },
+  {
+    "path": "game/src/game/assets/staff-owner-v1.png",
+    "bytes": 1173471,
+    "sha256": "9cde4dfe63f6d3efde541e5c4748cf308bf2acc0c090c2e4ae1f9b63b2f418d6"
+  },
+  {
+    "path": "game/src/game/assets/staff-server-v1.png",
+    "bytes": 1214909,
+    "sha256": "36ea484ad7ec6ab3d6ad59a83798dbe0a590bf3d6aad7b43c84122436df8b47e"
+  },
+  {
+    "path": "game/src/game/assets/stand-basic-v2.png",
+    "bytes": 708804,
+    "sha256": "3f6430b30af13d4dbd069f18e3445aabc0ae9f06da4918e3a8c5ff9c292f4a48"
+  },
+  {
+    "path": "game/src/game/assets/stand-basic.png",
+    "bytes": 1279763,
+    "sha256": "e024c22e23671a93ed2fbda77b64130c2ace2ec0e47b7d2f73a0d960a1547c1d"
+  },
+  {
+    "path": "game/src/game/assets/stand-castle-v2.png",
+    "bytes": 1244978,
+    "sha256": "f72ccae2eb8e5513f0a29765bd9e5067861e518c36bc3081ef6f1760499250bf"
+  },
+  {
+    "path": "game/src/game/assets/stand-castle.png",
+    "bytes": 896548,
+    "sha256": "178982fa3e4f197175c607f03b299468f6da86fc8fd926fbfab191430e3cbd81"
+  },
+  {
+    "path": "game/src/game/assets/stand-classic-v2.png",
+    "bytes": 930541,
+    "sha256": "7ab9b0881a2c940e066075a32328b370f70bd612e878e94cc283a52a89c0e90f"
+  },
+  {
+    "path": "game/src/game/assets/stand-classic.png",
+    "bytes": 780884,
+    "sha256": "951be2f36cd35886cfe7771ed9cef4fb782cc6f12ee09d549d505867cdcd9f92"
+  },
+  {
+    "path": "game/src/game/assets/stand-lemon-v2.png",
+    "bytes": 1085370,
+    "sha256": "da4a99e7d26769d53b546f4765c6efde4ec5f1021f60c3355c737587916bb9a2"
+  },
+  {
+    "path": "game/src/game/assets/stand-lemon.png",
+    "bytes": 975235,
+    "sha256": "963bc23dd423888968a0576ecae77dd33e1735e772ee2f927f123ccc2c1ab611"
+  },
+  {
+    "path": "ios/icons/AppIcon1024.png",
+    "bytes": 1532245,
+    "sha256": "edc6a797ed3306e2b25d5256c46016b705383b31574f93f2b518deb2cb28489f"
+  },
+  {
+    "path": "ios/icons/AppIcon120.png",
+    "bytes": 28248,
+    "sha256": "6c09a02a3bb65cf3d1c1746b52037c65038dc767828f248ee908faeacebb9d32"
+  },
+  {
+    "path": "ios/icons/AppIcon152.png",
+    "bytes": 43532,
+    "sha256": "d9f00fc49b2a4ee8d752d5b8e62811f085c1a788c7b2d3582a5c2f0e82483c9d"
+  },
+  {
+    "path": "ios/icons/AppIcon167.png",
+    "bytes": 51293,
+    "sha256": "dcd5c3521ba9fcf4290c9d7d1b7816231e470233cfa4d66ad87355236e4ec687"
+  },
+  {
+    "path": "ios/icons/AppIcon180.png",
+    "bytes": 59333,
+    "sha256": "7cfe9605cae31d6952fd9e93f1f8bf6fc843c66e19b0d8eeeb98d8a2904a645e"
+  }
+]

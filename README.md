@@ -1,4 +1,4 @@
-# Lemonade Tycoon Remastered — iPhone / Duo
+# Lemonade Tycoon Remastered — iPhone and iPad
 
 Version 0.2.1, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
@@ -12,7 +12,7 @@ The native UIKit/WKWebView shell serves all resources through an in-process loca
 
 ## Delivery
 
-`LemonadeTycoon-Remastered-v0.2.1.ipa`, bundle `com.wireproof.lemonadetycoon`, build 4, iOS 16 minimum. Standalone Apple Development signing and provisioning for the paired Duo. Updates preserve the standalone app container. Existing LiveContainer data is untouched and is not automatically migrated.
+The v0.2.1 prerelease includes `LemonadeTycoon-0.2.1-build4-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade Tycoon. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
@@ -22,11 +22,11 @@ Then at repository root: `python3 ios/build.py device` (or `simulator`). Require
 
 ## Verification
 
-98 simulation/save tests passed. WebKit tests exercise cover and inner trading, resizing, reload recovery, challenge creation and compact menu accessibility. Physical Wi-Fi installation and launch are checked separately; full on-device gameplay and fold transitions remain pending.
+98 simulation/save tests passed. WebKit tests exercise cover and inner trading, resizing, reload recovery, challenge creation and compact menu accessibility. On November 15, 2026, both the iPhone Duo and 11-inch iPad Pro reported version 0.2.1 build 4 installed. No reinstall or launch was performed during that audit. Runtime and visual tests were not performed in that audit; full physical gameplay and fold transitions remain unverified.
 
 ## Fidelity status
 
-The original PRC help and resource inventory are documented in `research/original-findings.md`. This build adapts Gamez0 / Willow Lane Lemonade's MIT-licensed simulation, with five original PC scenery backgrounds and the original logo extracted from the supplied media. The menu is rebuilt responsively and the app icon is newly generated. Original resources are private reference assets; see ORIGINAL-ASSETS-NOTICE.txt. Upstream commit: fee1153e4733d5a95a19e0b7c643b15b523ae9fe.
+This build adapts Gamez0 / Willow Lane Lemonade's MIT-licensed simulation, with five original PC scenery backgrounds and the original logo extracted from the supplied media. The menu is rebuilt responsively and the app icon is newly generated.  Upstream commit: fee1153e4733d5a95a19e0b7c643b15b523ae9fe.
 
 Known differences requiring further original-game work:
 
@@ -41,7 +41,7 @@ This is a playable foundation for the requested remaster, not a claim of complet
 
 ## Credits
 
-Original Lemonade Tycoon: Hexacto. Reconstruction base: https://github.com/Gamez0/lemonade-tycoon (MIT; retained in `game/LICENSE`). WIREPROOF iPhone adaptation. Phaser: MIT. Oswald font: SIL Open Font License (bundled notice). Original PRC is retained only in the user's existing library, not shipped in this app. Research-only extracted text is excluded from source release ZIPs.
+Original Lemonade Tycoon: Hexacto. Reconstruction base: https://github.com/Gamez0/lemonade-tycoon (MIT; retained in `game/LICENSE`). WIREPROOF iPhone adaptation. Phaser: MIT. Oswald font: SIL Open Font License (bundled notice).
 
 ## Screenshots
 
