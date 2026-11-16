@@ -1,6 +1,12 @@
 /** Layout is based on usable app geometry; no unverified hardware-name detection. */
 export function setupDuo(app: HTMLElement): void {
     document.documentElement.classList.add('duo');
+    // Scroll the content, not the primary action or the screen navigation.
+    const panel = app.querySelector<HTMLElement>('.panel')!;
+    const content = document.createElement('div');
+    content.className = 'panel-scroll';
+    panel.querySelector('#panel-title')!.after(content);
+    for (const id of ['preparation', 'selling', 'results']) content.append(panel.querySelector('#' + id)!);
     const controls = document.createElement('div');
     controls.className = 'duo-controls';
     controls.innerHTML = '<label>Display <select id="duo-display" aria-label="Display layout"><option value="auto">Automatic</option><option value="cover">Cover</option><option value="inner">Inner</option></select></label><span id="duo-profile"></span>';
@@ -28,8 +34,20 @@ export function setupDuo(app: HTMLElement): void {
         else app.querySelector('.control-row')!.prepend(toolbar);
         controls.querySelector('#duo-profile')!.textContent = `${profile === 'inner' ? 'Inner · side by side' : 'Cover · stacked'}`;
     };
+    const fitScene = () => {
+        const world = app.querySelector<HTMLElement>('.world-column')!;
+        const available = app.querySelector<HTMLElement>('.layout')!.clientHeight;
+        app.style.setProperty('--work-height', `${available}px`);
+        const width = document.documentElement.dataset.display === 'inner'
+            ? Math.min(world.clientWidth - 24, Math.max(120, available - 150) * 1.25)
+            : Math.min(world.clientWidth - 24, 310);
+        app.style.setProperty('--street-width', `${Math.max(120, width)}px`);
+    };
+    new ResizeObserver(fitScene).observe(app.querySelector('.layout')!);
+    new ResizeObserver(fitScene).observe(app.querySelector('.world-column')!);
     let timer: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(update, 160); });
     select.addEventListener('change', () => { localStorage.setItem('wireproof.display', select.value); update(); });
     update();
+    fitScene();
 }

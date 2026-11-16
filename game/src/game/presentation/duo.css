@@ -68,3 +68,85 @@
 .duo #game-container canvas { width: 100% !important; height: auto !important; margin: 0 !important; }
 .scene-load-error { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center; background: #143f29; color: #fffbdc; }
 .duo[data-display="cover"] #app > footer { order: 3; }
+/* Remastered game chrome. The viewport owns the shell; panels own scrolling. */
+.duo { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#123c29; }
+.duo body { height:100dvh; min-height:0; overflow:hidden; }
+.duo #app { height:100%; max-width:none; display:flex; flex-direction:column; gap:8px; padding:10px; margin:0; border:0; box-shadow:none; background:linear-gradient(145deg,#194f33,#103a28); }
+.duo #app > .masthead { flex:none; margin:0; height:28px; padding:0 3px; background:none; color:#f7edbc; }
+.duo #app h1 { font-family:inherit; font-size:16px; font-weight:700; }
+.duo #app .edition { color:#b4cdb6; font-size:10px; }
+.duo #app .resource-bar { flex:none; height:44px; padding:4px 12px; border:1px solid #ffffff20; border-radius:12px; background:#092f23; }
+.duo #app .resource-bar strong { font-family:inherit; font-size:20px; font-weight:650; }
+.duo #app .resource-bar .pixel-icon { width:26px; height:26px; }
+.duo #app .control-row { flex:none; margin:0; gap:10px; align-items:stretch; }
+.duo #app button { appearance:none; -webkit-appearance:none; clip-path:none; border:1px solid #88ae6b66; border-radius:10px; background:#365f39; color:#f6f4d7; text-shadow:none; box-shadow:none; font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; padding:8px 12px; min-height:44px; }
+.duo #app button:not(:disabled):hover { background:#477b47; }
+.duo #app button:disabled { opacity:.45; }
+.duo #app button:focus-visible { outline:3px solid #ffe17c; outline-offset:-3px; }
+.duo #app button[aria-pressed="true"] { background:#e7cc62; color:#173b27; border-color:#fff0aa; }
+.duo #app .toolbar { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); padding:0; gap:5px; background:none; }
+.duo #app .toolbar button { width:100%; min-width:0; padding:6px 2px; min-height:62px; gap:4px; font-size:11px; }
+.duo #app .toolbar .pixel-icon,.duo #app .toolbar .staff-portrait { width:24px; height:24px; }
+.duo #app .forecast { min-height:0; padding:10px 12px; border:1px solid #ffffff20; border-radius:12px; background:#204f35; }
+.duo #app .forecast .label { display:none; }
+.duo #app .weather-reading { gap:5px; }
+.duo #app .weather-reading strong { font-family:inherit; font-size:24px; }
+.duo #app .weather-reading .pixel-icon { width:28px; height:28px; }
+.duo #app .forecast-news p { margin:0 0 5px; font-size:11px; }
+.duo #app .layout { flex:1; min-height:0; gap:10px; }
+.duo[data-display="inner"] #app .layout { grid-template-columns:minmax(300px,.92fr) minmax(300px,1.08fr); align-items:stretch; overflow:hidden; }
+.duo[data-display="inner"] #app .world-column { position:static; height:100%; min-height:0; }
+.duo #app .management-column { display:flex; flex-direction:column; min-height:0; }
+.duo #app .panel { flex:1; min-height:0; padding:14px; border:1px solid #ffffff25; border-radius:14px; background:#1e5134; overflow:hidden; }
+.duo #app h2 { font:650 21px -apple-system,BlinkMacSystemFont,sans-serif; letter-spacing:0; margin:0 0 10px; }
+.duo #app .panel-scroll { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; padding-right:4px; scrollbar-width:thin; }
+.duo #app .intro { margin:0 0 12px; font-size:13px; line-height:1.45; }
+.duo #app .hint { color:#d1e0c2; font-size:11px; }
+.duo #app .recipe-group { width:100%; margin:0 0 12px; }
+.duo #app .recipe-group h3 { color:#e6d789; font-size:11px; letter-spacing:.5px; margin:0 0 6px; }
+.duo #app .recipe-row { width:100%; margin:0; border:0; border-bottom:1px solid #ffffff16; background:#143e2b; padding:7px 10px; }
+.duo #app .recipe-row label { min-width:0; font-size:13px; gap:8px; }
+.duo #app .recipe-row .pixel-icon { width:30px; height:30px; }
+.duo #app .recipe-yield { padding:8px 10px; background:#143e2b; border-radius:0 0 10px 10px; }
+.duo #app .spinner { flex:none; gap:4px; }
+.duo #app .spinner button { padding:0; min-width:44px; width:44px; height:44px; font-size:22px; background:#446d3c; }
+.duo #app .spinner input { width:48px; height:44px; border:1px solid #ffffff2b; border-radius:8px; background:#0e3324; color:#fff1aa; font:600 17px -apple-system,sans-serif; text-align:center; }
+.duo #app .primary,.duo #app #buy-order { background:#edd474; color:#173b27; border-color:#f5e6a0; font-size:15px; min-height:46px; }
+.duo #app #day-actions { flex:none; margin:8px 0 0; padding:8px 0 0; border-top:1px solid #ffffff25; }
+.duo #app #day-actions .primary { width:100%; margin-top:6px; }
+.duo #app .primary span { font:inherit; }
+.duo #app .cost-line,.duo #app .capacity { border:0; padding:2px 0; font-size:12px; }
+.duo #app #supply-warning { margin:4px 0; font-size:11px; }
+.duo #app #next { flex:none; width:100%; margin-top:8px; }
+.duo #app #message { flex:none; max-height:48px; overflow:auto; margin:4px 0 0; }
+.duo #app .world-frame { height:100%; padding:12px; border:1px solid #ffffff25; border-radius:14px; background:#173f2c; overflow:auto; }
+.duo #app .scene-window { width:var(--street-width,100%); max-width:100%; margin:0 auto; }
+.duo #app #game-container { border:0; border-radius:8px; background:#0e3021; }
+.duo #app canvas { image-rendering:pixelated; }
+.duo #app .location-heading { margin-top:10px; }
+.duo #app .location-heading h2 { font-size:18px; margin:0; }
+.duo #app .location-description { font-size:12px; margin:8px 0; }
+.duo #app .location-ratings { gap:12px; font-size:11px; }
+.duo #app > footer { flex:none; order:3; margin:0; max-height:44px; overflow:auto; padding:0; gap:6px; }
+.duo #app > footer > :not(.duo-more) { display:none; }
+.duo #app > footer .duo-more { display:block; width:auto; margin-left:auto; min-height:44px; }
+.duo #app > footer.expanded { max-height:28dvh; }
+.duo #app > footer.expanded > :not([hidden]) { display:revert; }
+.duo #app > footer.expanded .duo-controls { display:flex; }
+.duo #app .daily-strip { flex:none; padding:10px; border:1px solid #ffffff20; border-radius:12px; background:#123e2b; max-height:130px; overflow:auto; }
+.duo[data-display="cover"] #app { height:100%; }
+.duo[data-display="cover"] #app .layout { overflow:auto; }
+.duo[data-display="cover"] #app .management-column { height:max(380px,calc(100dvh - 280px)); flex:none; }
+.duo[data-display="cover"] #app .world-frame { height:auto; }
+.duo[data-display="cover"] #app .toolbar { flex:none; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); padding:0; }
+.duo[data-display="cover"] #app .toolbar button { min-height:56px; font-size:9px; }
+.duo[data-display="cover"] #app .recipe-row { padding:5px; }
+.duo[data-display="cover"] #app .recipe-row label { font-size:12px; gap:4px; }
+.duo[data-display="cover"] #app .resource-bar { gap:6px; padding:4px 8px; }
+.duo[data-display="cover"] #app .resource-bar strong { font-size:17px; }
+.duo[data-display="cover"] #app .resource-bar .pixel-icon { width:23px; height:23px; }
+@media(max-height:600px) and (min-width:680px) { .duo #app .forecast-news p,.duo #app .weather-advice { display:none; } .duo #app .control-row { min-height:64px; } }
+
+.duo[data-display="cover"] #app .management-column { height:var(--work-height,100%); min-height:0; }
+.duo #app .toolbar button[aria-pressed="true"] { background:#e7cc62; color:#173b27; }
+.duo #app .toolbar button[aria-pressed="true"]:hover { background:#f2dc82; }

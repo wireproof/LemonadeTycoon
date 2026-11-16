@@ -64,3 +64,27 @@ test('failed artwork shows recovery message instead of silently broken scenery',
  await page.route('**/*neighborhood*.png',r=>r.abort());await page.goto('/');await page.locator('#menu-continue').click();
  await expect(page.locator('.scene-load-error')).toBeVisible();await expect(page.getByRole('button',{name:'Reload artwork'})).toBeVisible();
 });
+for(const size of [{width:1280,height:832},{width:1194,height:790},{width:820,height:980}]) {
+ test(`primary actions and full scene stay inside viewport ${size.width}`,async({page})=>{
+  await page.setViewportSize(size);await page.goto('/');await page.locator('#menu-continue').click();
+  for(const tab of ['recipe','supplies','marketing','rent','upgrades','staff','results']) {
+   await page.locator(`[data-page="${tab}"]`).click();
+   for(const selector of ['#open','.duo-more','.location-ratings','canvas']) {
+    const box=await page.locator(selector).boundingBox();
+    expect(box.y).toBeGreaterThanOrEqual(0);expect(box.y+box.height).toBeLessThanOrEqual(size.height+1);
+   }
+  }
+  await page.locator('[data-page="recipe"]').click();
+  for(const b of await page.locator('.spinner button:visible').all())expect(await b.evaluate(e=>getComputedStyle(e).clipPath)).toBe('none');
+  await page.screenshot({path:`test-results/refined-${size.width}.png`});
+ });
+}
+
+test('cover primary action remains reachable without scrolling the shell',async({page})=>{
+ for(const viewport of [{width:382,height:644},{width:390,height:844}]) {
+  await page.setViewportSize(viewport);await page.goto('/');await page.locator('#menu-continue').click();await page.locator('[data-page="recipe"]').click();
+  const action=await page.locator('#open').boundingBox();const nav=await page.locator('#app > .toolbar').boundingBox();
+  expect(action.y).toBeGreaterThan(0);expect(action.y+action.height).toBeLessThanOrEqual(nav.y);
+  await page.screenshot({path:`test-results/refined-cover-${viewport.height}.png`});
+ }
+});

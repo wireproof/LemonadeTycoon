@@ -13,7 +13,10 @@
  for(const item of ['lemon','sugar','ice','cup']){click(`[data-supply="${item}"]`);click('[data-bundle="0"][data-delta="1"]');}
  click('#buy-order');click('[data-page="recipe"]');click('#open');
  await wait(()=>!$('#selling').hidden);click('#skip');await wait(()=>!$('#results').hidden);
- const result={passed:true,cash:$('#cash').textContent,day:$('#day').textContent,profile:document.documentElement.dataset.display,canvas:[canvas.width,canvas.height],assetsReady:canvas.dataset.assetsReady,mapWidth:canvas.dataset.mapSourceWidth,savedKeys:Object.keys(localStorage)};
+ await new Promise(r=>setTimeout(r,250));
+ const action=$('#open').getBoundingClientRect();
+ if(action.bottom>innerHeight+1||action.top<0)throw Error('Primary action clipped: '+JSON.stringify({top:action.top,bottom:action.bottom,height:innerHeight}));
+ const result={actionBottom:action.bottom,viewportHeight:innerHeight,passed:true,cash:$('#cash').textContent,day:$('#day').textContent,profile:document.documentElement.dataset.display,canvas:[canvas.width,canvas.height],assetsReady:canvas.dataset.assetsReady,mapWidth:canvas.dataset.mapSourceWidth,savedKeys:Object.keys(localStorage)};
  sessionStorage.setItem('native-smoke',JSON.stringify(result));
  window.webkit.messageHandlers.smoke.postMessage(result);
  }catch(e){window.webkit.messageHandlers.smoke.postMessage({passed:false,error:String(e),text:document.body.innerText.slice(0,1500)});}
