@@ -85,11 +85,11 @@ test('cover primary action remains reachable without scrolling the shell',async(
  for(const viewport of [{width:382,height:644},{width:390,height:844}]) {
   await page.setViewportSize(viewport);await page.goto('/');await page.locator('#menu-continue').click();await page.locator('[data-page="recipe"]').click();
   const action=await page.locator('#open').boundingBox();const nav=await page.locator('#app > .toolbar').boundingBox();
-  expect(action.y).toBeGreaterThan(0);expect(action.y+action.height).toBeLessThanOrEqual(nav.y);
+  expect(action.y).toBeGreaterThan(0);expect(action.y+action.height).toBeLessThanOrEqual(viewport.height);expect(action.x+action.width).toBeLessThanOrEqual(nav.x);
   await page.screenshot({path:`test-results/refined-cover-${viewport.height}.png`});
  }
 });
-for(const viewport of [{width:640,height:800},{width:834,height:1158},{width:390,height:844},{width:382,height:644},{width:1194,height:790}]) {
+for(const viewport of [{width:875,height:600},{width:640,height:800},{width:834,height:1158},{width:390,height:844},{width:382,height:644},{width:1194,height:790}]) {
  test(`workspace keeps purchase controls reachable ${viewport.width}x${viewport.height}`,async({page})=>{
   await page.setViewportSize(viewport);await page.goto('/');await page.locator('#menu-continue').click();
   for(const tab of ['recipe','supplies','upgrades','staff','marketing','rent','results']) {
@@ -97,7 +97,7 @@ for(const viewport of [{width:640,height:800},{width:834,height:1158},{width:390
    const controls=tab==='supplies'?['#buy-order','#cancel-order','#open']:['#open'];
    for(const selector of controls){const r=await page.locator(selector).boundingBox();expect(r.y).toBeGreaterThanOrEqual(0);expect(r.y+r.height).toBeLessThanOrEqual(viewport.height);}
    expect(await page.locator('.layout').evaluate(e=>e.scrollHeight<=e.clientHeight+1)).toBeTruthy();
-   if(tab==='upgrades' && viewport.height>=790) {
+   if(['recipe','supplies','upgrades'].includes(tab) && viewport.width>=600 && viewport.height>=600) {
     const fits=await page.locator('.panel-scroll').evaluate(e=>e.scrollHeight<=e.clientHeight+1);expect(fits).toBeTruthy();
    }
    if(['recipe','supplies','upgrades'].includes(tab))await page.screenshot({path:`test-results/workspace-${viewport.width}-${tab}.png`});
@@ -121,4 +121,30 @@ test('customer walk poses have distinct planted and passing frames',async({page}
  });
  expect(new Set(hashes.slice(0,4)).size).toBe(4);
  await page.locator('#poses').screenshot({path:'test-results/customer-walk-poses.png'});
+});
+
+test('right rail, independent settings and bounded upgrade artwork',async({page})=>{
+ for(const viewport of [{width:875,height:600},{width:640,height:800},{width:382,height:644},{width:1194,height:790}]) {
+  await page.setViewportSize(viewport);await page.goto('/');await page.locator('#menu-continue').click();
+  const nav=await page.locator('#app > .toolbar').boundingBox();const work=await page.locator('.layout').boundingBox();expect(nav.x).toBeGreaterThanOrEqual(work.x+work.width);
+  for(const button of await page.locator('#app > .toolbar button').all()){const b=await button.boundingBox();expect(b.y).toBeGreaterThanOrEqual(0);expect(b.y+b.height).toBeLessThanOrEqual(viewport.height);expect(b.height).toBeGreaterThanOrEqual(44);}
+  await page.locator('[data-page="upgrades"]').click();
+  for(const card of await page.locator('#upgrades-catalog .management-card').all()){
+   const picture=await card.locator('.catalog-picture').boundingBox();const art=await card.locator('.catalog-picture > *').boundingBox();const title=await card.locator('h3').boundingBox();expect(art.y+art.height).toBeLessThanOrEqual(picture.y+picture.height+1);expect(picture.y+picture.height<=title.y+1 || picture.x+picture.width<=title.x+1).toBeTruthy();
+  }
+  await page.locator('.duo-more').click();await expect(page.locator('#settings-dialog')).toBeVisible();await page.screenshot({path:`test-results/settings-game-${viewport.width}.png`});expect(await page.locator('.layout').boundingBox()).toEqual(work);
+  for(const tab of ['game','audio','display']){await page.locator(`[data-settings="${tab}"]`).click();expect(await page.locator('#settings-dialog').evaluate(e=>e.scrollHeight<=e.clientHeight+1)).toBeTruthy();}
+  await page.screenshot({path:`test-results/settings-${viewport.width}.png`});await page.locator('.settings-close').click();
+  await page.screenshot({path:`test-results/rail-${viewport.width}.png`});
+ }
+});
+test('compact reports use page controls and settings preserves the workspace',async({page})=>{
+ await page.setViewportSize({width:382,height:644});await page.goto('/');await page.locator('#menu-continue').click();await page.locator('[data-page="supplies"]').click();
+ for(const item of ['lemon','sugar','ice','cup']){await page.locator(`[data-supply="${item}"]`).click();await page.locator('[data-bundle="0"][data-delta="1"]').click();}
+ await page.locator('#buy-order').click();await page.locator('#open').click();await page.locator('#skip').click();await expect(page.locator('#results')).toBeVisible();
+ const pager=page.locator('.workspace-pages');await expect(pager).toBeVisible();
+ expect(await page.locator('.panel-scroll').evaluate(e=>getComputedStyle(e).overflowY)).toBe('hidden');
+ await page.getByRole('button',{name:'Next content page',exact:true}).click();expect(await page.locator('.panel-scroll').evaluate(e=>e.scrollTop)).toBeGreaterThan(0);
+ await page.getByRole('button',{name:'Previous content page',exact:true}).click();expect(await page.locator('.panel-scroll').evaluate(e=>e.scrollTop)).toBe(0);
+ await page.locator('.duo-more').click();await page.locator('[data-settings="audio"]').click();await page.locator('#mute-audio').check();await page.locator('.settings-close').click();await expect(page.locator('#results')).toBeVisible();
 });

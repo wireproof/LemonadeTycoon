@@ -12,17 +12,61 @@ export function setupDuo(app: HTMLElement): void {
     controls.innerHTML = '<label>Display <select id="duo-display" aria-label="Display layout"><option value="auto">Automatic</option><option value="cover">Cover</option><option value="inner">Inner</option></select></label><span id="duo-profile"></span>';
     app.querySelector('footer')!.prepend(controls);
     const more = document.createElement('button');
-    more.className = 'duo-more'; more.textContent = 'Settings'; more.setAttribute('aria-expanded', 'false');
-    app.querySelector('.masthead')!.append(more);
-    const stand = document.createElement('button'); stand.className = 'stand-toggle'; stand.textContent = 'Stand'; stand.setAttribute('aria-pressed', 'false');
-    app.querySelector('.masthead')!.append(stand);
+    more.className = 'duo-more'; more.innerHTML = '<span class="rail-symbol" aria-hidden="true">⚙</span>Settings'; more.setAttribute('aria-expanded', 'false');
+    app.querySelector('.toolbar')!.append(more);
+    const stand = document.createElement('button'); stand.className = 'stand-toggle'; stand.innerHTML = '<span class="rail-symbol" aria-hidden="true">⌂</span>Stand'; stand.setAttribute('aria-pressed', 'false');
+    app.querySelector('.toolbar')!.append(stand);
     stand.onclick = () => { const open = app.dataset.overview !== 'true'; app.dataset.overview = String(open); stand.setAttribute('aria-pressed', String(open)); };
     app.querySelector('.world-frame')!.append(app.querySelector('#forecast-news')!);
     const orderDock = document.createElement('div'); orderDock.className = 'order-dock';
     for (const selector of ['.order-total', '.purchase-actions']) orderDock.append(app.querySelector('#supplies-page ' + selector)!);
     content.after(orderDock);
-    more.onclick = () => { const open = app.querySelector('footer')!.classList.toggle('expanded'); more.setAttribute('aria-expanded', String(open)); };
-    app.querySelector('.toolbar')!.addEventListener('click', () => {
+    const settings = document.createElement('dialog'); settings.id = 'settings-dialog';
+    settings.innerHTML = `<header><h2>Settings</h2><button class="settings-close" aria-label="Close settings">Done</button></header><nav class="settings-tabs"><button data-settings="game" aria-pressed="true">Game</button><button data-settings="audio" aria-pressed="false">Sound</button><button data-settings="display" aria-pressed="false">Display</button></nav><section data-settings-panel="game"></section><section data-settings-panel="audio" hidden></section><section data-settings-panel="display" hidden></section>`;
+    app.append(settings);
+    settings.querySelector('[data-settings-panel="game"]')!.append(app.querySelector('footer')!);
+    settings.querySelector('[data-settings-panel="display"]')!.append(controls);
+    for (const id of ['music-volume', 'effects-volume', 'mute-audio']) settings.querySelector('[data-settings-panel="audio"]')!.append(app.querySelector('#' + id)!.closest('label')!);
+    more.onclick = () => { settings.showModal(); more.setAttribute('aria-expanded','true'); };
+    settings.addEventListener('close', () => more.setAttribute('aria-expanded','false'));
+    settings.querySelector('.settings-close')!.addEventListener('click', () => settings.close());
+    settings.addEventListener('click', event => {
+        const target = (event.target as HTMLElement).closest<HTMLElement>('button');
+        if (target?.dataset.settings) {
+            for (const panel of settings.querySelectorAll<HTMLElement>('[data-settings-panel]')) panel.hidden = panel.dataset.settingsPanel !== target.dataset.settings;
+            for (const button of settings.querySelectorAll<HTMLElement>('[data-settings]')) button.setAttribute('aria-pressed',String(button === target));
+        }
+        if (target?.id === 'main-menu' || target?.id === 'help-open') settings.close();
+    });
+    // Long reports use explicit pages; direct touch/wheel scrolling is disabled.
+    const pager = document.createElement('nav'); pager.className = 'workspace-pages'; pager.setAttribute('aria-label','Content pages');
+    pager.innerHTML = '<button aria-label="Previous content page">◀</button><span aria-live="polite"></span><button aria-label="Next content page">▶</button>';
+    content.after(pager);
+    let pageIndex = 0;
+    const paginate = () => {
+        const fullHeight = content.clientHeight + (pager.hidden ? 0 : pager.offsetHeight);
+        if (content.scrollHeight <= fullHeight + 1) { pager.hidden = true; pageIndex = 0; content.scrollTop = 0; return; }
+        pager.hidden = false;
+        const step = Math.max(64,content.clientHeight - 32);
+        const count = Math.max(1,Math.ceil((content.scrollHeight - content.clientHeight) / step) + 1);
+        pageIndex = Math.min(pageIndex,count - 1);
+        pager.hidden = count === 1;
+        pager.querySelector('span')!.textContent = `${pageIndex + 1} / ${count}`;
+        const buttons = pager.querySelectorAll<HTMLButtonElement>('button'); buttons[0].disabled = pageIndex === 0; buttons[1].disabled = pageIndex === count - 1;
+        content.scrollTop = pageIndex * step;
+    };
+    pager.querySelectorAll('button').forEach((button,i) => button.addEventListener('click', () => { pageIndex += i ? 1 : -1; paginate(); }));
+    new ResizeObserver(paginate).observe(content);
+    new MutationObserver(() => requestAnimationFrame(paginate)).observe(content,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden']});
+    const help = app.querySelector('#help-dialog')!;
+    const helpPages = Array.from(help.querySelectorAll<HTMLElement>(':scope > p'));
+    const helpNav = document.createElement('nav'); helpNav.className = 'help-pages'; helpNav.innerHTML = '<button aria-label="Previous help page">◀</button><span></span><button aria-label="Next help page">▶</button>'; help.append(helpNav);
+    let helpIndex = 0;
+    const showHelp = () => { helpPages.forEach((p,i) => p.hidden = i !== helpIndex); helpNav.querySelector('span')!.textContent = `${helpIndex + 1} / ${helpPages.length}`; const b = helpNav.querySelectorAll<HTMLButtonElement>('button'); b[0].disabled = helpIndex === 0; b[1].disabled = helpIndex === helpPages.length - 1; };
+    helpNav.querySelectorAll('button').forEach((b,i) => b.addEventListener('click', () => { helpIndex += i ? 1 : -1; showHelp(); })); showHelp();
+    app.querySelector('.toolbar')!.addEventListener('click', event => {
+        if (!(event.target as HTMLElement).closest('[data-page]')) return;
+        pageIndex = 0;
         app.dataset.overview = 'false'; stand.setAttribute('aria-pressed', 'false');
         content.scrollTop = 0;
         app.querySelector('.layout')!.scrollTop = 0;
@@ -37,9 +81,8 @@ export function setupDuo(app: HTMLElement): void {
         document.documentElement.dataset.display = profile;
         document.documentElement.dataset.orientation = window.innerHeight > width ? 'portrait' : 'landscape';
         const toolbar = app.querySelector<HTMLElement>('.toolbar')!;
-        if (profile === 'cover') app.insertBefore(toolbar, app.querySelector('footer'));
-        else app.querySelector('.control-row')!.prepend(toolbar);
-        controls.querySelector('#duo-profile')!.textContent = `${profile === 'inner' ? 'Inner · side by side' : 'Cover · stacked'}`;
+        app.append(toolbar);
+        controls.querySelector('#duo-profile')!.textContent = `${profile === 'inner' ? 'Inner display' : 'Cover display'}`;
     };
     const fitScene = () => {
         const world = app.querySelector<HTMLElement>('.world-column')!;

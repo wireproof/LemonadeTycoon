@@ -1,20 +1,20 @@
 # Lemonade Tycoon Remastered — iPhone and iPad
 
-Version 0.2.6, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
+Version 0.2.7, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
-Build 9 gives portrait preparation the full workspace, with a separate Stand view that appears automatically during sales. A compact header and navigation reclaim height; supply checkout stays fixed above Start Day, and equipment illustrations scale to fit a two-by-two grid. The approved icon, Home Screen label and save format remain unchanged.
+Build 10 moves the business sections into a right-side navigation rail and dedicates the top bar to stock and cash with larger icons. Settings opens in an independent Game / Sound / Display dialog. The game workspace uses page buttons for long reports and help instead of touch scrolling. Upgrade artwork is contained separately from titles and descriptions, with side-by-side illustrations on wider cards. The approved icon, Home Screen label and save format remain unchanged.
 
 ## Included
 
 Offline career and 30-day challenge, recipe and price controls, supplies, animated selling and queues, forecasts and news, equipment and staff, daily/cumulative reports, eight company slots, autosave and save import/export. The playable location selection is the original Palm roster: Suburbs, Park, Beach, Downtown and Mall.
 
-Cover presentation keeps all management tabs at the bottom and Settings in the header. Scrolling is confined to long reports or content that cannot fit the available height. Landscape inner presentation places management and the complete street scene side by side; portrait gives preparation the full workspace, with a Stand button for scenery and local news. Layout follows available width and safe areas, with a brief settling delay and an explicit Auto / Cover / Inner override. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
+Navigation stays on the right in both cover and inner layouts. Long reports and help use explicit page controls. Landscape inner presentation places management and the complete street scene side by side; portrait gives preparation the full workspace, with a Stand button for scenery and local news. Layout follows available width and safe areas, with a brief settling delay and an explicit Auto / Cover / Inner override. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
 
 The native UIKit/WKWebView shell serves all resources through an in-process local URL handler; no website, server, login or Internet connection is required. Rendering uses a capped 20 fps canvas. Export uses the native share sheet and writes a JSON backup to the app's Documents directory.
 
 ## Delivery
 
-The v0.2.6 prerelease includes `com.wireproof.lemonadetycoon-0.2.6-9-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
+The v0.2.7 prerelease includes `com.wireproof.lemonadetycoon-0.2.7-10-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
@@ -24,7 +24,7 @@ Then at repository root: `python3 ios/build.py device` (or `simulator`). Require
 
 ## Verification
 
-The simulation/save baseline has 99 passing tests. This layout update is checked with 17 WebKit tests across cover, inner, portrait and landscape dimensions. The native iPad portrait smoke test passed with all assets loaded, a saved trading day, and the primary action within the viewport. A native regression reproduced the old 32-pixel missing texture, then verified real 300-pixel map assets and a complete saved trading day in both Duo and iPad simulators. Native iPad and Duo smoke tests also verify that the primary action stays within the usable screen height. The corrected iPad simulator scene was visually inspected. Physical installs are verified separately without launching the apps; physical runtime and visual confirmation remain pending.
+The simulation/save baseline has 99 passing tests. Build 10 is checked with 20 WebKit tests, including short landscape layouts, right-rail placement, separate Settings tabs, bounded upgrade artwork, paged reports, trading, and save restoration. Native simulator trading smoke passed on the preceding build; it is not repeated for this layout-only update. Physical installation and save preservation are verified separately without launching the apps; physical runtime and visual confirmation remain pending.
 
 ## Fidelity status
 
@@ -49,9 +49,9 @@ Original Lemonade Tycoon: Hexacto. Reconstruction base: https://github.com/Gamez
 
 These captures are from development verification; appearance may differ on other devices.
 
-| Portrait upgrades | Supply checkout |
+| Right-side navigation and upgrades | Settings |
 | --- | --- |
-| ![Upgrade grid](docs/screenshots/portrait-upgrades.png) | ![Supply checkout](docs/screenshots/portrait-supplies.png) |
+| ![Upgrade grid](docs/screenshots/right-rail-upgrades.png) | ![Settings](docs/screenshots/settings-panel.png) |
 
 | Duo cover | Duo inner |
 | --- | --- |
