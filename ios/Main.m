@@ -18,6 +18,10 @@
 }
 - (void)webView:(WKWebView *)webView stopURLSchemeTask:(id<WKURLSchemeTask>)task {}
 @end
+@protocol LemonadeNavigation <NSObject>
+- (void)updateNavigationState:(NSDictionary *)state;
+- (void)sendAction:(NSString *)action;
+@end
 @interface LemonadeController : UIViewController <WKNavigationDelegate, WKScriptMessageHandler>
 @property(nonatomic,strong) WKWebView *web;
 @property(nonatomic,strong) UILabel *status;
@@ -27,8 +31,11 @@
  self.view = [UIView new]; self.view.backgroundColor = [UIColor colorWithRed:0.086 green:0.30 blue:0.15 alpha:1];
  WKWebViewConfiguration *config = [WKWebViewConfiguration new];
  #if TARGET_OS_SIMULATOR
- if([NSProcessInfo.processInfo.arguments containsObject:@"--smoke-test"]) [config.userContentController addScriptMessageHandler:self name:@"smoke"];
+ if([NSProcessInfo.processInfo.arguments containsObject:@"--smoke-test"]){[config.userContentController addScriptMessageHandler:self name:@"smoke"];[config.userContentController addScriptMessageHandler:self name:@"nativeTest"];}
 #endif
+ [config.userContentController addScriptMessageHandler:self name:@"nativeState"];
+ NSString *nativeFlag=@"document.documentElement.dataset.nativeNavigation='true';";
+ [config.userContentController addUserScript:[[WKUserScript alloc]initWithSource:nativeFlag injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES]];
  config.allowsInlineMediaPlayback = YES;
  [config setURLSchemeHandler:[BundleHandler new] forURLScheme:@"lemonade"];
  [config.userContentController addScriptMessageHandler:self name:@"exportSave"];
@@ -65,10 +72,17 @@
 }
 - (void)userContentController:(WKUserContentController *)controller didReceiveScriptMessage:(WKScriptMessage *)message {
  if (![message.body isKindOfClass:NSDictionary.class]) return;
+ if([message.name isEqualToString:@"nativeState"]){[(id<LemonadeNavigation>)self.tabBarController updateNavigationState:message.body];return;}
 #if TARGET_OS_SIMULATOR
+ if([message.name isEqualToString:@"nativeTest"]){
+  NSString *action=message.body[@"action"];UITabBarController *tabs=self.tabBarController;
+  if([action isEqualToString:@"back"])[(id<LemonadeNavigation>)tabs sendAction:@"back"];
+  else {NSDictionary *indices=@{@"home":@0,@"play":@1,@"settings":@3,@"help":@4};NSNumber *index=indices[action];if(index){tabs.selectedIndex=index.unsignedIntegerValue;[tabs.delegate tabBarController:tabs didSelectViewController:tabs.selectedViewController];}}return;
+ }
  if([message.name isEqualToString:@"smoke"]) {
  NSURL *dir=[NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
- [[NSJSONSerialization dataWithJSONObject:message.body options:NSJSONWritingPrettyPrinted error:nil] writeToURL:[dir URLByAppendingPathComponent:@"native-smoke.json"] atomically:YES]; return;
+ NSMutableDictionary *proof=[message.body mutableCopy];proof[@"nativeTabCount"]=@(self.tabBarController.viewControllers.count);proof[@"nativeTabFrame"]=NSStringFromCGRect([self.tabBarController.tabBar convertRect:self.tabBarController.tabBar.bounds toView:self.tabBarController.view]);
+ [[NSJSONSerialization dataWithJSONObject:proof options:NSJSONWritingPrettyPrinted error:nil] writeToURL:[dir URLByAppendingPathComponent:@"native-smoke.json"] atomically:YES]; return;
  }
 #endif
  NSString *text=message.body[@"text"], *name=[message.body[@"name"] lastPathComponent];
@@ -83,12 +97,55 @@
 }
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView { [webView reload]; }
 @end
+@interface LemonadeTabs : UITabBarController <UITabBarControllerDelegate,LemonadeNavigation>
+@property(nonatomic,strong) LemonadeController *game;
+
+@end
+@implementation LemonadeTabs
+- (void)viewDidLoad {
+ [super viewDidLoad];self.overrideUserInterfaceStyle=UIUserInterfaceStyleDark;self.delegate=self;self.game=[LemonadeController new];
+ self.view.backgroundColor=[UIColor colorWithRed:0.086 green:0.30 blue:0.15 alpha:1];self.tabBar.tintColor=[UIColor colorWithRed:0.95 green:0.83 blue:0.4 alpha:1];
+ if(UIDevice.currentDevice.userInterfaceIdiom==UIUserInterfaceIdiomPad){if(@available(iOS 17.0,*))self.traitOverrides.horizontalSizeClass=UIUserInterfaceSizeClassCompact;}
+ NSArray *names=@[@"Home",@"Play",@"Stock",@"Settings",@"Help"];
+ NSArray *symbols=@[@"house",@"play.fill",@"shippingbox",@"gearshape",@"questionmark.circle"];
+ NSMutableArray *hosts=[NSMutableArray new];for(NSUInteger i=0;i<names.count;i++){UIViewController *host=[UIViewController new];host.view.backgroundColor=self.view.backgroundColor;host.tabBarItem=[[UITabBarItem alloc]initWithTitle:names[i] image:[UIImage systemImageNamed:symbols[i]] tag:i];UIBarButtonItem *back=[[UIBarButtonItem alloc]initWithImage:[UIImage systemImageNamed:@"chevron.backward"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];back.accessibilityLabel=@"Back";back.enabled=NO;host.navigationItem.leftBarButtonItem=back;
+ UINavigationController *navigation=[[UINavigationController alloc]initWithRootViewController:host];navigation.tabBarItem=host.tabBarItem;navigation.navigationBarHidden=YES;[hosts addObject:navigation];}
+ self.viewControllers=hosts;self.customizableViewControllers=nil;[self attachGame];
+ self.view.tintColor=self.tabBar.tintColor;
+}
+- (void)attachGame {
+ UIViewController *host=self.selectedViewController;if([host isKindOfClass:UINavigationController.class])host=((UINavigationController*)host).topViewController;if(self.game.parentViewController==host)return;
+ [self.game willMoveToParentViewController:nil];[self.game.view removeFromSuperview];[self.game removeFromParentViewController];
+ [host addChildViewController:self.game];self.game.view.frame=host.view.bounds;self.game.view.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;[host.view addSubview:self.game.view];[self.game didMoveToParentViewController:host];
+}
+- (void)sendAction:(NSString *)action {
+ NSData *data=[NSJSONSerialization dataWithJSONObject:@[action] options:0 error:nil];NSString *arg=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+ [self.game.web evaluateJavaScript:[NSString stringWithFormat:@"document.dispatchEvent(new CustomEvent('lemonade:navigate',{detail:%@[0]}))",arg] completionHandler:nil];
+}
+- (void)goBack {[self sendAction:@"back"];}
+- (BOOL)tabBarController:(UITabBarController *)tabs shouldSelectViewController:(UIViewController *)host {return !self.game.web.loading && !self.game.presentedViewController;}
+- (void)tabBarController:(UITabBarController *)tabs didSelectViewController:(UIViewController *)host {
+ [self attachGame];NSArray *actions=@[@"home",@"play",@"stock",@"settings",@"help"];
+ if(self.selectedIndex==2){
+  [self.game.web evaluateJavaScript:@"JSON.stringify({menu:!document.querySelector('#start-menu').hidden,cash:document.querySelector('#cash').textContent,items:['lemon','sugar','ice','cup'].map(x=>document.querySelector('#inventory-'+x).textContent)})" completionHandler:^(id value,NSError *error){
+   if(error||![value isKindOfClass:NSString.class])return;NSDictionary *state=[NSJSONSerialization JSONObjectWithData:[value dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];if(!state)return;
+   NSArray *items=state[@"items"];NSString *message=[state[@"menu"] boolValue]?@"Continue a company to view its inventory.":[NSString stringWithFormat:@"Lemons: %@\nSugar: %@\nIce: %@\nCups: %@",items[0],items[1],items[2],items[3]];
+   UIAlertController *sheet=[UIAlertController alertControllerWithTitle:[state[@"menu"] boolValue]?@"Stock":[@"Cash " stringByAppendingString:state[@"cash"]] message:message preferredStyle:UIAlertControllerStyleAlert];[sheet addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleCancel handler:nil]];[self.game presentViewController:sheet animated:YES completion:nil];
+  }];
+ }else [self sendAction:actions[self.selectedIndex]];
+}
+- (void)updateNavigationState:(NSDictionary *)state {
+ for(UINavigationController *navigation in self.viewControllers){navigation.navigationBarHidden=![state[@"canBack"] boolValue];navigation.topViewController.navigationItem.leftBarButtonItem.enabled=[state[@"canBack"] boolValue];}
+ NSString *cash=state[@"cash"];self.viewControllers[2].tabBarItem.title=[state[@"menu"] boolValue]?@"Stock":([cash isKindOfClass:NSString.class]?cash:@"Stock");
+}
+- (UIViewController *)childViewControllerForStatusBarStyle {return self.game;}
+@end
 @interface LemonadeScene : UIResponder <UIWindowSceneDelegate>
 @property(nonatomic,strong) UIWindow *window;
 @end
 @implementation LemonadeScene
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)options {
- self.window=[[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene]; self.window.rootViewController=[LemonadeController new]; [self.window makeKeyAndVisible];
+ self.window=[[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene]; self.window.rootViewController=[LemonadeTabs new]; [self.window makeKeyAndVisible];
 }
 @end
 @interface LemonadeApp : UIResponder <UIApplicationDelegate>

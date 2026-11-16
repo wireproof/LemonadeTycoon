@@ -50,6 +50,7 @@ import { CompanyBook } from "./game/simulation/company-book";
 import "./game/presentation/style.css";
 import "./game/presentation/duo.css";
 import "./game/presentation/rail.css";
+import "./game/presentation/native-navigation.css";
 import { setupDuo } from "./game/presentation/duo";
 
 const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;

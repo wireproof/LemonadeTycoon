@@ -99,6 +99,47 @@ export function setupDuo(app: HTMLElement): void {
     let timer: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(update, 160); });
     select.addEventListener('change', () => { localStorage.setItem('wireproof.display', select.value); update(); });
+    const nativeHandler = (window as unknown as {webkit?: {messageHandlers?: {nativeState?: {postMessage(value: unknown): void}}}}).webkit?.messageHandlers?.nativeState;
+    if (nativeHandler) {
+        document.documentElement.dataset.nativeNavigation = 'true';
+        let priorState = '', timer: ReturnType<typeof setTimeout> | undefined;
+        const publish = () => {
+            timer = undefined;
+            const lobby = document.querySelector<HTMLElement>('#start-menu');
+            const menu = Boolean(lobby && !lobby.hidden);
+            const creating = document.querySelector<HTMLElement>('#menu-create');
+            const state = {menu, cash:app.querySelector('#cash')!.textContent, canBack:!menu || Boolean(document.querySelector('dialog[open]')) || Boolean(creating && !creating.hidden)};
+            const json = JSON.stringify(state); if (json !== priorState) { priorState = json; nativeHandler.postMessage(state); }
+        };
+        new MutationObserver(() => { if (!timer) timer = setTimeout(publish,200); }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','open','data-overview']});
+        const openDialog = (dialog: HTMLDialogElement) => {
+            const wasHidden = app.hidden, wasInert = app.inert;
+            app.hidden = false; app.inert = false;
+            if (!dialog.open) dialog.showModal();
+            dialog.addEventListener('close',() => { const lobby=document.querySelector<HTMLElement>('#start-menu'); if(lobby && !lobby.hidden){app.hidden=wasHidden;app.inert=wasInert;} },{once:true});
+        };
+        document.addEventListener('lemonade:navigate', event => {
+            const action=(event as CustomEvent<string>).detail;
+            const lobby=document.querySelector<HTMLElement>('#start-menu');const menu=Boolean(lobby && !lobby.hidden);
+            const click=(selector:string)=>document.querySelector<HTMLButtonElement>(selector)?.click();
+            if(action==='back'){
+                const dialog=document.querySelector<HTMLDialogElement>('dialog[open]');
+                if(dialog)dialog.close();
+                else if(menu)click('#menu-cancel');
+                else if(app.dataset.overview==='true')stand.click();
+                else if(app.dataset.view!=='recipe')click('[data-page="recipe"]');
+                else click('#main-menu');
+            }else{
+                for(const dialog of document.querySelectorAll<HTMLDialogElement>('dialog[open]'))dialog.close();
+                if(action==='settings')openDialog(settings);
+                if(action==='help')openDialog(app.querySelector<HTMLDialogElement>('#help-dialog')!);
+                if(action==='home' && !menu)click('#main-menu');
+                if(action==='play'){if(menu)click('#menu-continue');else stand.click();}
+            }
+            setTimeout(publish,0);
+        });
+        publish();
+    }
     update();
     fitScene();
 }

@@ -1,0 +1,9 @@
+/* Native UITabBarController owns the system navigation area. The web view only owns business tabs. */
+:root.duo[data-native-navigation][data-display][data-orientation] #app { grid-template-columns:minmax(0,1fr); grid-template-rows:54px 44px minmax(0,1fr) 64px; grid-template-areas:"stock" "status" "work" "nav"; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app > .toolbar { display:flex; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; border-radius:16px; gap:6px; padding:4px; scroll-snap-type:x proximity; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app > .toolbar::-webkit-scrollbar { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar button[data-page] { flex:1 0 74px; width:auto; min-height:52px; scroll-snap-align:center; font-size:11px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar .duo-more,:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar .stand-toggle { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .cost-line,:root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .capacity { width:calc(50% - 8px); }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .cost-line { margin-right:12px; }
+:root[data-native-navigation] #start-menu .lobby-footer #menu-options,:root[data-native-navigation] #start-menu .lobby-footer #menu-help { display:none; }
