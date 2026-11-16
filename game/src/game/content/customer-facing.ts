@@ -27,3 +27,9 @@ export function customerAppearance(facing: CustomerFacing, action: CustomerActio
         flipX: facing.endsWith("w"),
     };
 }
+
+export type WalkingStride = { x: number; y: number; distance: number };
+/** Accumulate actual travel, so standing still never advances a walk cycle. */
+export function advanceStride(previous: WalkingStride | undefined, x: number, y: number, seed: number): WalkingStride {
+    return { x, y, distance: (previous?.distance ?? seed * 9) + (previous ? Math.hypot(x - previous.x, y - previous.y) : 0) };
+}

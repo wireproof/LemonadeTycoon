@@ -161,3 +161,13 @@ test('mapped transit lanes avoid the observed station bench, square statue, foun
         assert.ok(!(bx > 195 && bx < 288 && by > 154), 'beach volleyball net');
     }
 });
+test('walking cadence follows distance instead of elapsed time or frame rate',()=>{
+ const {advanceStride}=require('../.test-build/content/customer-facing.js');
+ const start=advanceStride(undefined,0,0,0);
+ assert.equal(advanceStride(start,0,0,0).distance,0);
+ const direct=advanceStride(start,12,16,0);
+ const midpoint=advanceStride(start,6,8,0);
+ assert.equal(direct.distance,20);
+ assert.equal(advanceStride(midpoint,12,16,0).distance,direct.distance);
+ assert.equal(advanceStride(direct,0,0,0).distance,40);
+});

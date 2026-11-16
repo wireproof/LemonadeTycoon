@@ -14,11 +14,11 @@ export function paintClassicCustomer(target: CanvasRenderingContext2D, visual: k
     const [shirt, light, shade, skin, hair, pants, trouserLight] = palettes[visual];
     const edge = "#252a22", shoe = "#473e32";
     const walking = (action === "walk" || action === "cup") && phase < 4;
-    const step = walking ? [2, 0, -2, 0][phase] : 0;
-    const lift = walking ? [0, 1, 0, -1][phase] : 0;
-    const bob = walking && (phase === 1 || phase === 3) ? 0 : .5;
+    const step = walking ? [4, 0, -4, 0][phase] : 0;
+    const lift = walking ? [0, 2, 0, -2][phase] : 0;
+    const bob = walking && (phase === 1 || phase === 3) ? 0 : 1;
     const point = (side: number, forward: number, z: number): Point =>
-        [16 + side * 1.1 + forward * .75, 43.5 + side * .3 + forward * (rear ? -.4 : .4) - z];
+        [16 + side * 1.3 + forward * .75, 43.5 + side * .3 + forward * (rear ? -.4 : .4) - z * .9];
     function polygon(points: readonly Point[], color: string): void {
         ctx.beginPath(); ctx.moveTo(Math.round(points[0][0]), Math.round(points[0][1]));
         for (const [x, y] of points.slice(1)) ctx.lineTo(Math.round(x), Math.round(y));
@@ -73,9 +73,9 @@ export function paintClassicCustomer(target: CanvasRenderingContext2D, visual: k
     arm(1);
     const [hx, hy] = point(.4, 0, 29 + bob);
     polygon([[hx - 2, hy], [hx + 1, hy - 1], [hx + 3, hy + 1], [hx + 2, hy + 5], [hx - 1, hy + 5], [hx - 2, hy + 3]], edge);
-    rect(hx - 1, hy, 3, 4, rear ? hair : skin);
-    if (rear) { rect(hx - 1, hy + 1, 3, 3, hair); rect(hx + 2, hy + 2, 1, 2, skin); }
-    else { rect(hx - 1, hy, 3, 1, hair); rect(hx - 1, hy + 1, 1, 2, hair); rect(hx + 2, hy + 1, 1, 3, skin); }
+    rect(hx - 2, hy, 5, 5, rear ? hair : skin);
+    if (rear) { rect(hx - 2, hy + 1, 5, 4, hair); rect(hx + 2, hy + 2, 1, 2, skin); }
+    else { rect(hx - 2, hy, 5, 2, hair); rect(hx - 1, hy + 1, 1, 2, hair); rect(hx + 2, hy + 1, 1, 3, skin); }
     // The32x48 source is the drawing grid, not an antialiased vector miniature.
     // Resolve coverage here so scaling cannot turn joints into soft round beads.
     const pixels = ctx.getImageData(0, 0, source.width, source.height);

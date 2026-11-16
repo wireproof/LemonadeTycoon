@@ -88,3 +88,32 @@ test('cover primary action remains reachable without scrolling the shell',async(
   await page.screenshot({path:`test-results/refined-cover-${viewport.height}.png`});
  }
 });
+test('portrait stacks the street and exposes upgrade tiles with large illustrations',async({page})=>{
+ await page.setViewportSize({width:834,height:1158});await page.goto('/');await page.locator('#menu-continue').click();
+ await expect(page.locator('html')).toHaveAttribute('data-orientation','portrait');
+ const world=await page.locator('.world-column').boundingBox();const panel=await page.locator('.management-column').boundingBox();expect(world.y+world.height).toBeLessThanOrEqual(panel.y);
+ await page.locator('[data-page="upgrades"]').click();
+ await expect(page.locator('#upgrades-catalog .management-card')).toHaveCount(4);
+ const cards=await page.locator('#upgrades-catalog .management-card').all();
+ expect((await cards[0].boundingBox()).y).toBe((await cards[1].boundingBox()).y);
+ for(const card of cards){await card.scrollIntoViewIfNeeded();await expect(card.locator('button')).toBeVisible();expect((await card.locator('.catalog-picture').boundingBox()).height).toBeGreaterThanOrEqual(140);}
+ await page.locator('.panel-scroll').evaluate(e=>e.scrollTop=0);
+ await page.screenshot({path:'test-results/portrait-upgrade-tiles.png'});
+ await page.setViewportSize({width:1194,height:790});await expect(page.locator('html')).toHaveAttribute('data-orientation','landscape');
+ await page.screenshot({path:'test-results/landscape-upgrade-tiles.png'});
+});
+test('customer walk poses have distinct planted and passing frames',async({page})=>{
+ const fs=require('node:fs'),ts=require('typescript');
+ const source=fs.readFileSync('src/game/presentation/classic-customer-art.ts','utf8');
+ const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText;
+ await page.goto('/');await page.evaluate(()=>{document.body.innerHTML='<canvas id="poses" width="768" height="384"></canvas>';document.body.style.background='#ddd9bb';});
+ await page.addScriptTag({content:'var exports={};'+js+';window.paintCustomer=exports.paintClassicCustomer;'});
+ const hashes=await page.evaluate(()=>{
+  const c=document.querySelector('#poses'),ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;const hashes=[];
+  for(const [row,kind] of ['neighbor','office','student'].entries())for(let frame=0;frame<4;frame++){
+   const tile=document.createElement('canvas');tile.width=64;tile.height=96;window.paintCustomer(tile.getContext('2d'),kind,false,'walk',frame);hashes.push(tile.toDataURL());ctx.drawImage(tile,frame*192,row*128,85,128);
+  }return hashes;
+ });
+ expect(new Set(hashes.slice(0,4)).size).toBe(4);
+ await page.locator('#poses').screenshot({path:'test-results/customer-walk-poses.png'});
+});

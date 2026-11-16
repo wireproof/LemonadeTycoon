@@ -29,6 +29,7 @@ export function setupDuo(app: HTMLElement): void {
         // Width reflects the native safe-area constrained WKWebView, including hosted layouts.
         const profile = select.value === 'auto' ? (width >= 680 ? 'inner' : 'cover') : select.value;
         document.documentElement.dataset.display = profile;
+        document.documentElement.dataset.orientation = window.innerHeight > width ? 'portrait' : 'landscape';
         const toolbar = app.querySelector<HTMLElement>('.toolbar')!;
         if (profile === 'cover') app.insertBefore(toolbar, app.querySelector('footer'));
         else app.querySelector('.control-row')!.prepend(toolbar);
@@ -38,7 +39,8 @@ export function setupDuo(app: HTMLElement): void {
         const world = app.querySelector<HTMLElement>('.world-column')!;
         const available = app.querySelector<HTMLElement>('.layout')!.clientHeight;
         app.style.setProperty('--work-height', `${available}px`);
-        const width = document.documentElement.dataset.display === 'inner'
+        const portrait = document.documentElement.dataset.display === 'inner' && document.documentElement.dataset.orientation === 'portrait';
+        const width = portrait ? Math.min(world.clientWidth * .58 - 24, Math.max(120, world.clientHeight - 24) * 1.25) : document.documentElement.dataset.display === 'inner'
             ? Math.min(world.clientWidth - 24, Math.max(120, available - 150) * 1.25)
             : Math.min(world.clientWidth - 24, 310);
         app.style.setProperty('--street-width', `${Math.max(120, width)}px`);

@@ -11,7 +11,7 @@ if (app/'Web').exists(): shutil.rmtree(app/'Web')
 shutil.copytree(root/'game/dist',app/'Web')
 shutil.copy2(root/'game/LICENSE',app/'LICENSE.txt')
 if mode=='simulator': shutil.copy2(root/'ios/smoke.js',app/'smoke.js')
-info=dict(CFBundleExecutable='LemonadeTycoon',CFBundleIdentifier='com.wireproof.lemonadetycoon',CFBundleName='Lemonade Tycoon',CFBundleDisplayName='Lemonade',CFBundleVersion='7',CFBundleShortVersionString='0.2.4',CFBundlePackageType='APPL',MinimumOSVersion='16.0',LSRequiresIPhoneOS=True,UIDeviceFamily=[1,2],UILaunchScreen={},UIRequiresFullScreen=False,UISupportedInterfaceOrientations=['UIInterfaceOrientationPortrait','UIInterfaceOrientationLandscapeLeft','UIInterfaceOrientationLandscapeRight'],UIFileSharingEnabled=True,LSSupportsOpeningDocumentsInPlace=True,ITSAppUsesNonExemptEncryption=False,UIApplicationSceneManifest={'UIApplicationSupportsMultipleScenes':False,'UISceneConfigurations':{'UIWindowSceneSessionRoleApplication':[{'UISceneConfigurationName':'Lemonade','UISceneDelegateClassName':'LemonadeScene'}]}})
+info=dict(CFBundleExecutable='LemonadeTycoon',CFBundleIdentifier='com.wireproof.lemonadetycoon',CFBundleName='Lemonade Tycoon',CFBundleDisplayName='Lemonade',CFBundleVersion='8',CFBundleShortVersionString='0.2.5',CFBundlePackageType='APPL',MinimumOSVersion='16.0',LSRequiresIPhoneOS=True,UIDeviceFamily=[1,2],UILaunchScreen={},UIRequiresFullScreen=False,UISupportedInterfaceOrientations=['UIInterfaceOrientationPortrait','UIInterfaceOrientationLandscapeLeft','UIInterfaceOrientationLandscapeRight'],UIFileSharingEnabled=True,LSSupportsOpeningDocumentsInPlace=True,ITSAppUsesNonExemptEncryption=False,UIApplicationSceneManifest={'UIApplicationSupportsMultipleScenes':False,'UISceneConfigurations':{'UIWindowSceneSessionRoleApplication':[{'UISceneConfigurationName':'Lemonade','UISceneDelegateClassName':'LemonadeScene'}]}})
 icons=root/'ios/icons'
 if icons.exists():
  for p in icons.glob('*.png'): shutil.copy2(p,app/p.name)
@@ -29,7 +29,7 @@ if profile and mode=='device':
  shutil.copy2(profile,app/'embedded.mobileprovision');args+=['--entitlements',str(ep)]
 subprocess.run(args+[str(app)],check=True)
 if mode=='device':
- out=root/'LemonadeTycoon-Remastered-v0.2.4.ipa'
+ out=root/'LemonadeTycoon-Remastered-v0.2.5.ipa'
  with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
   for p in app.rglob('*'):
    if p.is_file(): z.write(p,p.relative_to(build))

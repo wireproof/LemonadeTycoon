@@ -1,3 +1,4 @@
+import { advanceStride } from "../content/customer-facing";
 import Phaser from "phaser";
 import { createArt } from "./art";
 import type { StreetDay, WalkingVisitor } from "../simulation/street-day";
@@ -25,6 +26,7 @@ interface StreetHooks {
 export class StreetScene extends Phaser.Scene {
     private hooks: StreetHooks;
     private people = new Map<number, Phaser.GameObjects.Sprite>();
+    private strides = new Map<number, { x: number; y: number; distance: number }>();
     private facings = new Map<number, CustomerFacing>();
     private queueFeet = new Map<number, { progress: number; tick: number }>();
     private exits = new Map<number, { from: number; lead?: number; purpose: "service" | "through" | "depart" }>();
@@ -106,6 +108,7 @@ export class StreetScene extends Phaser.Scene {
         for (const bubble of this.bubbles.values()) bubble.destroy();
         this.people.clear();
         this.facings.clear();
+        this.strides.clear();
         this.queueFeet.clear();
         this.exits.clear();
         this.bubbles.clear();
@@ -136,7 +139,13 @@ export class StreetScene extends Phaser.Scene {
             const facing = facingStand ? vectorFacing(ground[0] - logicalX, ground[1] - logicalY, previous) :
                 routeFacing(location, position, purpose, travel, previous);
             this.facings.set(id, facing);
-            const appearance = customerAppearance(facing, action, (day.tick + tickFraction) * .8 + id, this.motion.matches);
+            const last = this.strides.get(id);
+            const stride = advanceStride(last, x, y, id);
+            const distance = stride.distance;
+            this.strides.set(id, stride);
+            // One animation frame per nine world pixels: cadence follows travel,
+            // including queue advances, speed changes and the final approach.
+            const appearance = customerAppearance(facing, action, distance / 9, this.motion.matches);
             visible.add(id);
             let sprite = this.people.get(id);
             if (!sprite) {
@@ -208,6 +217,7 @@ export class StreetScene extends Phaser.Scene {
             sprite.destroy();
             this.people.delete(id);
             this.facings.delete(id);
+            this.strides.delete(id);
             this.queueFeet.delete(id);
             this.exits.delete(id);
             this.bubbles.get(id)?.destroy();
