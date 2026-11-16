@@ -246,6 +246,8 @@ new Phaser.Game({
     antialias: true,
     roundPixels: false,
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    // WKURLSchemeHandler returns status 0 for successful bundled local assets.
+    loader: { localScheme: ["file://", "capacitor://", "lemonade://"] },
     scene: [scene],
     audio: { noAudio: true },
     fps: { target: 20, forceSetTimeOut: true },

@@ -67,7 +67,7 @@ export class StartMenu {
             </section>
             <details class="lobby-saves"><summary>Saved companies <span>8 slots</span></summary><div class="company-list" aria-label="Saved companies">${Array.from({length:8},(_,i)=>`<button data-company="${i}" aria-pressed="false">Empty slot</button>`).join("")}</div></details>
           </main>
-          <footer class="lobby-footer"><nav aria-label="Menu tools"><button id="menu-options">${options}<span>Options</span></button><button id="menu-help">${help}<span>Help</span></button><button id="menu-import">${disk}<span>Import save</span></button><button id="menu-credits">${credits}<span>Credits</span></button><button id="menu-quit" hidden>Quit</button></nav><p>WIREPROOF · v0.2.1</p></footer>
+          <footer class="lobby-footer"><nav aria-label="Menu tools"><button id="menu-options">${options}<span>Options</span></button><button id="menu-help">${help}<span>Help</span></button><button id="menu-import">${disk}<span>Import save</span></button><button id="menu-credits">${credits}<span>Credits</span></button><button id="menu-quit" hidden>Quit</button></nav><p>WIREPROOF · v0.2.3</p></footer>
           <dialog id="menu-credits-dialog"><h2>Lemonade Tycoon Remastered</h2><p>Original game and scenery: Hexacto / Broderbund. iPhone adaptation: WIREPROOF. Community simulation, character art and music: Gamez0 / Willow Lane Lemonade (MIT).</p><p>Original artwork extracted from your supplied game disc for this private build. Phaser: MIT. Oswald: SIL Open Font License.</p><form method="dialog"><button>Close</button></form></dialog>
         </div>`;
         document.body.append(this.root);

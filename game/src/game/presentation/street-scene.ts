@@ -54,6 +54,23 @@ export class StreetScene extends Phaser.Scene {
     }
 
     create(): void {
+        const missing = [
+            ...LOCATION_IDS.map(id => `map-source-${id}`),
+            ...Object.keys(STAND_ASSETS),
+        ].filter(key => !this.textures.exists(key));
+        this.game.canvas.dataset.assetsReady = String(missing.length === 0);
+        this.game.canvas.dataset.missingAssets = missing.join(",");
+        if (missing.length) {
+            const notice = document.createElement("div");
+            notice.className = "scene-load-error";
+            notice.setAttribute("role", "alert");
+            notice.textContent = "The street artwork could not load. Your saved game is safe. ";
+            const retry = document.createElement("button");
+            retry.textContent = "Reload artwork";
+            retry.onclick = () => window.location.reload();
+            notice.append(retry);
+            this.game.canvas.parentElement!.append(notice);
+        }
         this.cameras.main.setZoom(2).centerOn(320, 256);
         createArt(this);
         createStandArt(this);

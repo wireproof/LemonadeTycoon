@@ -47,3 +47,20 @@ test('compact Duo menu keeps primary actions visible and saves accessible',async
  await expect(page.locator('[data-company]').last()).toBeVisible();
  expect(await page.locator('#start-menu').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBeTruthy();
 });
+for (const viewport of [{width:382,height:644},{width:1194,height:790}]) {
+ test(`artwork and controls survive resize ${viewport.width}`,async({page})=>{
+  await page.setViewportSize(viewport);await page.goto('/');await page.locator('#menu-continue').click();
+  const canvas=page.locator('canvas');await expect(canvas).toHaveAttribute('data-assets-ready','true');
+  expect(Number(await canvas.getAttribute('data-map-source-width'))).toBeGreaterThan(100);
+  for(const size of [viewport,{width:820,height:980},viewport]){
+   await page.setViewportSize(size);await page.waitForTimeout(250);
+   const box=await canvas.boundingBox();expect(box.width/box.height).toBeCloseTo(1.25,1);
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBeTruthy();
+  }
+  await page.screenshot({path:`test-results/fixed-game-${viewport.width}.png`,fullPage:true});
+ });
+}
+test('failed artwork shows recovery message instead of silently broken scenery',async({page})=>{
+ await page.route('**/*neighborhood*.png',r=>r.abort());await page.goto('/');await page.locator('#menu-continue').click();
+ await expect(page.locator('.scene-load-error')).toBeVisible();await expect(page.getByRole('button',{name:'Reload artwork'})).toBeVisible();
+});

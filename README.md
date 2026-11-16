@@ -1,8 +1,8 @@
 # Lemonade Tycoon Remastered — iPhone and iPad
 
-Version 0.2.2, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
+Version 0.2.3, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
-Build 5 changes only the Home Screen label to **Lemonade**. It preserves the bundle ID, approved icon and game resources from build 4. The in-game version text remains 0.2.1.
+Build 6 fixes native scenery loading through the bundled URL scheme, preserves scene proportions on resize, restores cover navigation order, and adds an artwork-recovery message. The approved icon, Lemonade Home Screen label and existing save format are unchanged.
 
 ## Included
 
@@ -14,7 +14,7 @@ The native UIKit/WKWebView shell serves all resources through an in-process loca
 
 ## Delivery
 
-The v0.2.2 prerelease includes `LemonadeTycoon-0.2.2-build5-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
+The v0.2.3 prerelease includes `LemonadeTycoon-0.2.3-build6-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
@@ -24,7 +24,7 @@ Then at repository root: `python3 ios/build.py device` (or `simulator`). Require
 
 ## Verification
 
-98 simulation/save tests passed. WebKit tests exercise cover and inner trading, resizing, reload recovery, challenge creation and compact menu accessibility. On November 15, 2026, both the iPhone Duo and 11-inch iPad Pro received version 0.2.2 build 5 as an in-place update. The existing Duo save files were hash-verified unchanged; no iPad save files were present. Neither app was launched. The candidate display name is exactly Lemonade with no localized overrides; actual Home Screen appearance remains visually unverified. Runtime and visual tests were not performed in that audit; full physical gameplay and fold transitions remain unverified.
+98 simulation/save tests and seven WebKit tests passed. A native regression reproduced the old 32-pixel missing texture, then verified real 300-pixel map assets and a complete saved trading day in both Duo and iPad simulators. The corrected iPad simulator scene was visually inspected. Physical installs are verified separately without launching the apps; physical runtime and visual confirmation remain pending.
 
 ## Fidelity status
 
