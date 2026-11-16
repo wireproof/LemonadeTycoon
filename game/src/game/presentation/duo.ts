@@ -12,15 +12,21 @@ export function setupDuo(app: HTMLElement): void {
     controls.innerHTML = '<label>Display <select id="duo-display" aria-label="Display layout"><option value="auto">Automatic</option><option value="cover">Cover</option><option value="inner">Inner</option></select></label><span id="duo-profile"></span>';
     app.querySelector('footer')!.prepend(controls);
     const more = document.createElement('button');
-    more.className = 'duo-more'; more.textContent = 'Menu / Settings'; more.setAttribute('aria-expanded', 'false');
-    app.querySelector('footer')!.prepend(more);
+    more.className = 'duo-more'; more.textContent = 'Settings'; more.setAttribute('aria-expanded', 'false');
+    app.querySelector('.masthead')!.append(more);
+    const stand = document.createElement('button'); stand.className = 'stand-toggle'; stand.textContent = 'Stand'; stand.setAttribute('aria-pressed', 'false');
+    app.querySelector('.masthead')!.append(stand);
+    stand.onclick = () => { const open = app.dataset.overview !== 'true'; app.dataset.overview = String(open); stand.setAttribute('aria-pressed', String(open)); };
+    app.querySelector('.world-frame')!.append(app.querySelector('#forecast-news')!);
+    const orderDock = document.createElement('div'); orderDock.className = 'order-dock';
+    for (const selector of ['.order-total', '.purchase-actions']) orderDock.append(app.querySelector('#supplies-page ' + selector)!);
+    content.after(orderDock);
     more.onclick = () => { const open = app.querySelector('footer')!.classList.toggle('expanded'); more.setAttribute('aria-expanded', String(open)); };
-    app.querySelector('.toolbar')!.addEventListener('click', () => requestAnimationFrame(() => {
-        if (document.documentElement.dataset.display === 'cover') app.querySelector('.management-column')!.scrollIntoView({block:'start'});
-    }));
-    app.querySelector('#open')!.addEventListener('click', () => requestAnimationFrame(() => {
-        if (document.documentElement.dataset.display === 'cover' && !app.querySelector<HTMLElement>('#selling')!.hidden) app.querySelector('.world-column')!.scrollIntoView({block:'start'});
-    }));
+    app.querySelector('.toolbar')!.addEventListener('click', () => {
+        app.dataset.overview = 'false'; stand.setAttribute('aria-pressed', 'false');
+        content.scrollTop = 0;
+        app.querySelector('.layout')!.scrollTop = 0;
+    });
     const select = controls.querySelector('select')!;
     const saved = localStorage.getItem('wireproof.display');
     select.value = saved === 'cover' || saved === 'inner' ? saved : 'auto';

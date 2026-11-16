@@ -9,7 +9,7 @@ import { LOCATIONS, PALM_LOCATION_IDS as LOCATION_IDS } from "../content/locatio
 const recipeRow = (item: "lemon" | "sugar" | "ice") => `<div class="recipe-row"><label for="${item}">${icon(item)}<span>${ITEMS[item].name}</span></label><div class="spinner"><button type="button" data-adjust="${item}" data-direction="-1" aria-label="Decrease ${item}">−</button><input id="${item}" type="number" min="0" max="${item === "sugar" ? 10 : item === "ice" ? 7 : 20}" step="1" value="${item === "sugar" ? 3 : item === "ice" ? 2 : 6}"><button type="button" data-adjust="${item}" data-direction="1" aria-label="Increase ${item}">+</button></div></div>`;
 
 export const markup = `
-<header class="masthead"><h1>${icon("lemon")} Lemonade Tycoon</h1><span class="edition">REMASTERED · 0.2.5</span></header>
+<header class="masthead"><h1>${icon("lemon")} Lemonade Tycoon</h1><span class="edition">REMASTERED · 0.2.6</span></header>
 <section class="resource-bar" aria-label="Supplies and cash">
  ${ITEM_KEYS.map((item) => `<span><span class="sr-only">${ITEMS[item].name}: </span>${icon(item)}<strong id="inventory-${item}">0</strong></span>`).join("")}
  <strong id="cash" aria-label="Cash on hand"></strong>

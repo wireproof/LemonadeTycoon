@@ -188,3 +188,73 @@
 .duo[data-display="cover"] #app .catalog-picture { height:112px; }
 .duo[data-display="cover"] #app .catalog-picture .equipment-illustration,.duo[data-display="cover"] #app .catalog-picture .stand-preview,.duo[data-display="cover"] #app .catalog-picture .staff-portrait { height:108px; width:108px; }
 .duo[data-display="inner"][data-orientation="portrait"] #app[data-phase="selling"] .layout { grid-template-rows:minmax(220px,52%) minmax(0,1fr); }
+
+/* Task-focused workspace: no outer scrolling or permanently reserved scene in portrait. */
+.duo #app { gap:6px; padding:8px; }
+.duo #app > .masthead { height:44px; gap:8px; }
+.duo #app .masthead h1 { margin-right:auto; }
+.duo #app .masthead .edition { display:none; }
+.duo #app .masthead button { display:block; margin:0; min-height:44px; padding:6px 10px; font-size:12px; }
+.duo #app .resource-bar { height:38px; }
+.duo #app .forecast { padding:6px 10px; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.duo #app .forecast-weather { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.duo #app .date-line { font-size:11px; }
+.duo #app .weather-reading strong { font-size:20px; }
+.duo #app .weather-advice { display:none; }
+.duo #app .forecast-news p { display:none; }
+.duo #app .forecast-news { font-size:11px; }
+.duo #app .toolbar button { min-height:58px; font-size:11px; padding:4px 2px; }
+.duo #app .toolbar .pixel-icon,.duo #app .toolbar .staff-portrait { width:30px; height:30px; }
+.duo #app > footer:not(.expanded) { display:none; }
+.duo #app > footer.expanded { display:flex; max-height:30dvh; }
+.duo #app .panel { padding:10px; }
+.duo #app h2 { font-size:18px; margin-bottom:6px; }
+.duo #app .intro { font-size:12px; margin-bottom:6px; }
+.duo #app .recipe-group { margin-bottom:6px; }
+.duo #app .recipe-row { padding:4px 6px; }
+.duo #app .recipe-yield { padding:5px 6px; }
+.duo #app #day-actions { margin-top:5px; padding-top:4px; }
+.duo #app .order-dock { display:none; flex:none; padding-top:4px; border-top:1px solid #ffffff25; }
+.duo #app[data-view="supplies"]:not([data-phase="selling"]) .order-dock { display:block; }
+.duo #app .order-dock .order-total { margin:0; padding:2px 0; font-size:12px; }
+.duo #app .order-dock .purchase-actions { margin:4px 0 0; display:grid; grid-template-columns:1fr 2fr; gap:8px; }
+.duo #app .supply-tabs button { padding:5px 2px; font-size:11px; }
+.duo #app .supply-tabs .pixel-icon { width:32px; height:32px; }
+.duo #app .bundle-row { padding:4px 0; }
+.duo #app #order-summary { margin:4px 0; }
+.duo #app .management-card { padding:8px; gap:3px; }
+.duo #app .management-card h3 { margin:2px 0; font-size:14px; }
+.duo #app .management-card p { font-size:11px; line-height:1.25; margin:0 0 4px; }
+.duo #app .catalog-picture { height:clamp(44px,calc((var(--work-height) - 350px) / 2),108px); }
+.duo #app .catalog-picture .equipment-illustration,.duo #app .catalog-picture .stand-preview,.duo #app .catalog-picture .staff-portrait { height:100%; width:108px; }
+.duo #app #upgrades-catalog,.duo #app #staff-catalog { gap:8px; }
+.duo[data-display="cover"] #app .layout { overflow:hidden; }
+.duo[data-display="cover"] #app .management-column { height:100%; flex:1; }
+.duo[data-display="cover"] #app .world-column { display:none; }
+.duo[data-display="cover"] #app .toolbar { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:3px; overflow:visible; }
+.duo[data-display="cover"] #app .toolbar button { min-height:58px; font-size:9px; }
+.duo[data-display="cover"] #app .toolbar .pixel-icon,.duo[data-display="cover"] #app .toolbar .staff-portrait { width:28px; height:28px; }
+.duo[data-orientation="portrait"][data-display="inner"] #app .layout { grid-template-rows:minmax(0,1fr); }
+.duo[data-orientation="portrait"][data-display="inner"] #app .management-column { grid-row:1; }
+.duo[data-orientation="portrait"][data-display="inner"] #app .world-column { display:none; }
+.duo[data-orientation="portrait"] #app[data-overview="true"] .management-column,
+.duo[data-display="cover"] #app[data-overview="true"] .management-column { display:none; }
+.duo[data-orientation="portrait"] #app[data-overview="true"] .world-column,
+.duo[data-display="cover"] #app[data-overview="true"] .world-column { display:block; height:100%; width:100%; }
+.duo[data-orientation="portrait"][data-display="inner"] #app[data-phase="selling"] .layout { grid-template-rows:minmax(200px,60%) minmax(0,1fr); }
+.duo[data-orientation="portrait"][data-display="inner"] #app[data-phase="selling"] .world-column { display:block; grid-row:1; }
+.duo[data-orientation="portrait"][data-display="inner"] #app[data-phase="selling"] .management-column { grid-row:2; }
+.duo[data-display="cover"] #app[data-phase="selling"] .world-column { display:block; flex:1; min-height:0; }
+.duo[data-display="cover"] #app[data-phase="selling"] .management-column { display:none; }
+.duo[data-display="cover"] #app[data-phase="selling"] .world-frame,
+.duo[data-display="cover"] #app[data-overview="true"] .world-frame { height:100%; max-width:none; }
+.duo #app[data-phase="selling"] .stand-toggle { display:none; }
+@media(max-width:420px) { .duo #app .masthead h1 { font-size:13px; } .duo #app .masthead button { font-size:10px; padding:5px 7px; } .duo #app .forecast-weather { gap:4px; } .duo #app .recipe-page .intro { display:none; } }
+
+.duo #app .masthead button { width:auto; flex:none; }
+.duo #app .masthead h1 { white-space:nowrap; }
+.duo #app[data-phase="selling"] .panel { min-height:0; }
+
+.duo #app .world-frame > #forecast-news { font-size:12px; line-height:1.4; grid-column:1/-1; }
+.duo[data-display="cover"] #app .catalog-picture { height:clamp(44px,calc((var(--work-height) - 350px) / 2),88px); }
+.duo[data-display="cover"] #app .catalog-picture .equipment-illustration,.duo[data-display="cover"] #app .catalog-picture .stand-preview,.duo[data-display="cover"] #app .catalog-picture .staff-portrait { height:100%; width:96px; }
