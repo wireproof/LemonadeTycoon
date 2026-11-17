@@ -1,9 +1,9 @@
 // Money is always integer cents. Recipe ingredients are small serving units.
 export const ITEMS = {
-    lemon: { name: "Lemon units", cost: 8, bundle: 40 },
-    sugar: { name: "Sugar scoops", cost: 4, bundle: 20 },
-    ice: { name: "Ice cubes", cost: 2, bundle: 60 },
-    cup: { name: "Paper cups", cost: 6, bundle: 20 },
+    lemon: { name: "Lemons", cost: 8, bundle: 40 },
+    sugar: { name: "Sugar", cost: 4, bundle: 20 },
+    ice: { name: "Ice Cubes", cost: 2, bundle: 60 },
+    cup: { name: "Cups", cost: 6, bundle: 20 },
 } as const;
 
 export type Item = keyof typeof ITEMS;

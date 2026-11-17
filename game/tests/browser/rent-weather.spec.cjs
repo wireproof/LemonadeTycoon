@@ -32,8 +32,8 @@ test('rain and location previews explain the real visitor and cooling effects be
     await selectLocation(page, 'park');
     await expect(page.locator('#rent-description')).toContainText('Rain reduces outdoor foot traffic');
     await selectLocation(page, 'mall');
-    await expect(page.locator('#rent-description')).toContainText('Indoors:20°C');
-    await expect(page.locator('#rent-details')).toContainText('20°C / 0 ice per cup');
+    await expect(page.locator('#rent-description')).toContainText('Indoors: 68°F');
+    await expect(page.locator('#rent-details')).toContainText('68°F / 0 ice per cup');
 });
 
 test('real rainy Park and Mall days use the previewed visitors and keep indoor temperature after reload', async ({ page }) => {
@@ -49,7 +49,7 @@ test('real rainy Park and Mall days use the previewed visitors and keep indoor t
             buffer: Buffer.from(encodeSave(business.state, business.history)) });
         await expect(page.locator('#save-status')).toContainText('Imported');
         await page.locator('#open').click(); await page.clock.runFor(100);
-        if (location === 'mall') await expect(page.locator('#weather')).toHaveText('20°C');
+        if (location === 'mall') await expect(page.locator('#weather')).toHaveText('68°F');
         await page.locator('#skip').click(); await page.clock.runFor(500);
         const raw = await page.evaluate(key => localStorage.getItem(key), SAVE_KEY), doc = JSON.parse(raw);
         expect(doc.history.at(-1).daily.visitors).toBe(expected);

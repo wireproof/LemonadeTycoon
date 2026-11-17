@@ -641,14 +641,14 @@ function renderRent(): void {
         Math.round((location.patience + STAFF[state.management.staff].patience) * customer.patience)));
     const totalWeights = location.weights.reduce((total: number, weight) => total + weight, 0);
     const conditions = locationConditions(state.day, selectedLocation, state.weather);
-    text("rent-description", location.description + (selectedLocation === "mall" ? " Indoors:20\u00b0C; sheltered from rain." :
+    text("rent-description", location.description + (selectedLocation === "mall" ? " Indoors: 68\u00b0F; sheltered from rain." :
         state.weather.label === "Rainy" ? " Rain reduces outdoor foot traffic today." : "") +
         (conditions.newsFactor !== 1 ? ` Today's news changes visitors by ${Math.round((conditions.newsFactor - 1) * 100)}%.` : ""));
     rows("rent-details", [
         ["Daily rent / moving", `${money(location.rent)} / ${money(moveFee)}`],
         ["Visitors / budget", `${expectedTraffic({ ...state, business: null }, selectedLocation)} / ${Math.round(location.budget * 100)}%`],
         ["Wait range / arrivals", `${(Math.min(...patience) / 10).toFixed(1)}–${(Math.max(...patience) / 10).toFixed(1)}s / ${(location.arrival / 10).toFixed(1)}s`],
-        ["Temperature / cooling", `${conditions.temperature}\u00b0C / ${recipeTaste(state.plan.recipe, conditions.temperature).preferredIce} ice per cup`],
+        ["Temperature / cooling", `${Math.round(conditions.temperature * 9 / 5 + 32)}\u00b0F / ${recipeTaste(state.plan.recipe, conditions.temperature).preferredIce} ice per cup`],
         ["Office workers", `${Math.round(location.weights[1] / totalWeights * 100)}% · shortest wait`],
         ["Popularity / satisfaction", `${Math.round(rating.popularity * 100)}% / ${Math.round(rating.satisfaction * 100)}%`],
     ]);
@@ -676,7 +676,7 @@ function render(): void {
     text("day", String(date.day).padStart(2, "0"));
     element("career-date").title = `Business day ${state.day}`;
     text("cash", money(state.cash));
-    text("weather", effectiveWeather(state).temperature + "°C");
+    text("weather", `${Math.round(effectiveWeather(state).temperature * 9 / 5 + 32)}°F`);
     const weatherArt = element("weather-art");
     if (weatherArt.dataset.weather !== state.weather.label) {
         weatherArt.innerHTML = icon(
@@ -689,7 +689,7 @@ function render(): void {
     text("weather-label", selling ? "Current weather" : closed ? "Today's weather" : "Weather forecast");
     const climateLocation = prep ? state.pendingLocation ?? state.location : state.location;
     text("weather-advice", climateLocation === "mall" && (!state.business || state.business.conditions)
-        ? `${state.weather.label} outside · indoors 20\u00b0C`
+        ? `${state.weather.label} outside · indoors 68\u00b0F`
         : state.business && !state.business.conditions
             ? `${state.weather.label} · saved opening weather`
             : `${state.weather.label} · ${prep ? "steady all day" : LOCATIONS[state.location].street}`);
@@ -788,6 +788,8 @@ function render(): void {
     if (prep && readiness.cups === 0) element("open").setAttribute("aria-describedby", "supply-warning");
     else element("open").removeAttribute("aria-describedby");
     text("unit-cost", money(unitCost(state.plan.recipe, state.freeIce + openingCosts(state).ice)));
+    text("price-pitcher", money(state.plan.price * cupsPerPitcher(state.plan.recipe)));
+    text("price-pitcher-yield", `(${cupsPerPitcher(state.plan.recipe)} cups)`);
     const legacyPaidDay = state.business !== null && state.business.customerModel !== "purchase-first-v1";
     text("ice-basis", legacyPaidDay ? "Ice reserved at opening" : "Per sold cup");
     text("pitcher-yield", `${cupsPerPitcher(state.plan.recipe)} cups per pitcher; ` + (legacyPaidDay

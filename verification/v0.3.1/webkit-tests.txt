@@ -1,0 +1,14 @@
+[WebServer] (node:83366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:83367) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 382 (3.2s)
+  ✓  2 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 640 (3.6s)
+  ✓  3 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 875 (3.0s)
+  ✓  4 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 834 (3.0s)
+  ✓  5 [webkit] › tests/browser/consolidated.spec.cjs:24:1 › combined pages trade, report, navigate and retain a company (3.9s)
+
+  5 passed (18.0s)

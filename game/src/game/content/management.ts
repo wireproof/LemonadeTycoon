@@ -14,9 +14,9 @@ export const STAFF = {
     host: { name: "Robin · queue host", wage: 180, speed: 0, patience: 12 },
 } as const;
 export const ADS = {
-    none: { name: "Word of mouth", cost: 0, traffic: 1 },
-    flyers: { name: "Local flyers", cost: 180, traffic: 1.2 },
-    radio: { name: "Local radio", cost: 450, traffic: 1.45 },
+    none: { name: "Social", cost: 0, traffic: 1 },
+    flyers: { name: "Ads", cost: 180, traffic: 1.2 },
+    radio: { name: "TV", cost: 450, traffic: 1.45 },
 } as const;
 export interface Management {
     readonly upgrades: Readonly<Record<Upgrade, number>>;

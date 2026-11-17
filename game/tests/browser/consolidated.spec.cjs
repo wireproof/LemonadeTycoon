@@ -7,8 +7,10 @@ for(const viewport of [{width:382,height:620},{width:640,height:800},{width:875,
  await page.locator('#menu-saves').click();await expect(page.locator('#menu-library')).toBeVisible();await page.locator('.library-close').click();
  for(const [group,parts] of [['recipe',['recipe','marketing']],['business',['rent','staff']],['shop',['supplies','upgrades']]]){
   await action(page,'workspace:'+group);await expect(page.locator('#app')).toHaveAttribute('data-workspace',group);
-  await expect(page.locator('#app > .toolbar')).toBeHidden();await expect(page.locator('.world-column')).toBeHidden();
+  await expect(page.locator('#weather')).toHaveText('90°F');await expect(page.locator('#app > .toolbar')).toBeHidden();await expect(page.locator('.world-column')).toBeHidden();
   for(const part of parts)await expect(page.locator('#'+part+'-page')).toBeVisible();
+  if(group==='recipe'){await expect(page.locator('#price-pitcher')).toHaveText('$18.00');await expect(page.locator('[data-advertising=none] strong')).toHaveText('Social');await expect(page.locator('[data-advertising=radio] strong')).toHaveText('TV');}
+  if(group==='business'){await expect(page.locator('.location-list button:visible')).toHaveCount(1);const art=await page.locator('.location-list button:visible img').boundingBox();expect(art.height).toBeGreaterThanOrEqual(80);}
   await page.waitForTimeout(200);await page.screenshot({path:`test-results/${group}-${viewport.width}.png`});
   const overflow=await page.locator('.panel-scroll').evaluate(e=>({actual:e.scrollHeight,available:e.clientHeight}));expect(overflow.actual,group+' overflow').toBeLessThanOrEqual(overflow.available+1);
  }
@@ -27,7 +29,7 @@ test('combined pages trade, report, navigate and retain a company',async({page})
  await action(page,'workspace:shop');await expect(page.locator('#app')).toHaveAttribute('data-workspace','shop');
  for(const item of ['lemon','sugar','ice','cup']){await page.locator(`[data-supply="${item}"]`).click();await page.locator('[data-bundle="0"][data-delta="1"]').click();}
  await page.locator('#buy-order').click();await expect(page.locator('#cash')).not.toHaveText('$40.00');
- await action(page,'workspace:recipe');await page.locator('#price').fill('1.50');await page.locator('#price').blur();
+ await action(page,'workspace:recipe');await page.locator('#price').fill('2.00');await page.locator('#price').blur();await expect(page.locator('#price-pitcher')).toHaveText('$24.00');await page.locator('#price').fill('1.50');await page.locator('#price').blur();
  await action(page,'workspace:business');await page.locator('[data-staff="none"]').click();
  await action(page,'back');await expect(page.locator('#app')).toHaveAttribute('data-workspace','stand');
  await page.locator('.stand-start').click();await expect(page.locator('#app')).toHaveAttribute('data-phase','selling');await page.locator('#skip').click();await expect(page.locator('#app')).toHaveAttribute('data-phase','preparation');

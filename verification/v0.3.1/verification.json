@@ -1,0 +1,27 @@
+{
+  "version": "0.3.1",
+  "build": "14",
+  "typecheck": "passed",
+  "productionWebKitTestsPassed": 5,
+  "viewports": [
+    "382x620",
+    "640x800",
+    "875x600",
+    "834x1047"
+  ],
+  "checks": [
+    "No management overflow",
+    "Large location previews",
+    "Fahrenheit",
+    "Social Ads TV labels",
+    "Price per pitcher follows cup price",
+    "Trading and save retention"
+  ],
+  "nativeRuntime": {
+    "duo": "passed",
+    "ipad": "passed"
+  },
+  "physicalRuntimeTested": false,
+  "physicalVisualConfirmed": false,
+  "simulatorScreenshotsReviewed": true
+}

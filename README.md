@@ -1,8 +1,10 @@
 # Lemonade Tycoon Remastered — iPhone and iPad
 
-Version 0.3.0, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
+Version 0.3.1, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
-Five native destinations replace the separate management pages and bottom toolbar: Menu; Stand and reports; Business (locations and staff); Shop (supplies and equipment); and Recipe & Marketing. Management pages use the full workspace. Stand has a large scene, live statistics, integrated reports and a dedicated action footer. The welcome menu is rebuilt with a company card, career/challenge choices and a separate company library. The approved app icon and save format are preserved.
+Landscape workspaces now use larger recipe controls, promotion cards, stock controls and staff portraits. Locations have a large complete-scene preview with previous/next selection. Inventory labels are Lemons, Sugar, Ice Cubes and Cups; promotion choices are Social, Ads and TV. Displayed temperatures use Fahrenheit. Recipe & Marketing shows an editable price per cup and the equivalent price per pitcher for the current yield. Internal simulation units and saved advertising identifiers remain compatible with existing saves.
+
+The five native destinations remain Menu, Stand and reports, Business, Shop, and Recipe & Marketing. There is no second bottom toolbar. The approved app icon and save format are preserved.
 
 ## Included
 
@@ -14,7 +16,7 @@ The native UIKit/WKWebView shell serves all resources through an in-process loca
 
 ## Delivery
 
-The v0.3.0 prerelease includes `com.wireproof.lemonadetycoon-0.3.0-13-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
+The v0.3.1 prerelease includes `com.wireproof.lemonadetycoon-0.3.1-14-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
@@ -24,7 +26,7 @@ Then at repository root: `python3 ios/build.py device` (or `simulator`). Require
 
 ## Verification
 
-Build 13 verification and device delivery are recorded in `verification/v0.3.0`. Browser layout checks cover four usable viewport sizes and exercise the five destinations. A separate trading flow checks purchasing, day-end reports, native navigation actions and save retention. The Duo native simulator passed an offline trading day, artwork readiness, five-tab navigation and save retention. The iPad native simulator installation timed out, so its fresh native runtime check remains incomplete. Duo build 13 installation and 13 unchanged save files are verified; physical iPad delivery is pending availability. Neither physical app was launched. Physical installation, runtime testing and visual acceptance are recorded separately; simulator and browser checks do not establish physical fold-transition behavior.
+Build 14 passed TypeScript checking and five production WebKit scenarios: four usable viewport sizes and a complete purchase, trading, reporting and save-retention flow. Checks cover overflow, enlarged location previews, Fahrenheit, promotion labels and calculated pitcher pricing. Duo and iPad native simulator trading, artwork, navigation and save-retention checks passed. Duo installation and 13 unchanged save files are verified; physical iPad delivery remains pending availability. Native and physical delivery results are recorded separately in `verification/v0.3.1`. Physical runtime and visual acceptance are not performed during background delivery.
 
 ## Fidelity status
 
@@ -56,6 +58,12 @@ These are WebKit layout verification captures, not physical-device screenshots.
 | ![Recipe](docs/screenshots/cover-recipe-complete.png) | ![Welcome](docs/screenshots/cover-welcome-complete.png) |
 
 ![Landscape Play with live statistics](docs/screenshots/inner-play-stats.png)
+
+![Landscape Recipe and Marketing](docs/screenshots/landscape-recipe.png)
+
+![Landscape Business](docs/screenshots/landscape-business.png)
+
+![Landscape Shop](docs/screenshots/landscape-shop.png)
 
 | Combined Shop | Business | Daily report |
 | --- | --- | --- |
