@@ -19,7 +19,8 @@
  const action=$('#open').getBoundingClientRect();
  if(action.bottom>innerHeight+1||action.top<0)throw Error('Primary action clipped: '+JSON.stringify({top:action.top,bottom:action.bottom,height:innerHeight}));
  const savedCash=$('#cash').textContent;native('home');await wait(()=>!$('#start-menu').hidden);native('play');await wait(()=>$('#start-menu').hidden);if($('#cash').textContent!==savedCash)throw Error('Cash changed across native navigation');
- const result={nativeSettingsBackAndResume:true,nativeNavigation:document.documentElement.dataset.nativeNavigation,actionBottom:action.bottom,viewportHeight:innerHeight,passed:true,cash:$('#cash').textContent,day:$('#day').textContent,profile:document.documentElement.dataset.display,canvas:[canvas.width,canvas.height],assetsReady:canvas.dataset.assetsReady,mapWidth:canvas.dataset.mapSourceWidth,savedKeys:Object.keys(localStorage)};
+ await wait(()=>$('.stand-dashboard').getBoundingClientRect().height>0);if($('[data-live-source="sold"]').textContent!==$('#sold').textContent)throw Error('Live sold total differs');
+ const result={liveStatsVerified:true,nativeSettingsBackAndResume:true,nativeNavigation:document.documentElement.dataset.nativeNavigation,actionBottom:action.bottom,viewportHeight:innerHeight,passed:true,cash:$('#cash').textContent,day:$('#day').textContent,profile:document.documentElement.dataset.display,canvas:[canvas.width,canvas.height],assetsReady:canvas.dataset.assetsReady,mapWidth:canvas.dataset.mapSourceWidth,savedKeys:Object.keys(localStorage)};
  sessionStorage.setItem('native-smoke',JSON.stringify(result));
  window.webkit.messageHandlers.smoke.postMessage(result);
  }catch(e){window.webkit.messageHandlers.smoke.postMessage({passed:false,error:String(e),text:document.body.innerText.slice(0,1500)});}

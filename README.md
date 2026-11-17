@@ -1,20 +1,20 @@
 # Lemonade Tycoon Remastered — iPhone and iPad
 
-Version 0.2.8, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
+Version 0.2.9, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
-Build 11 uses native UIKit navigation from the welcome screen through gameplay. On the Duo, Home, Play, Stock, Settings and Help occupy the system sidebar below the status area, with a native Back button above it. Business sections use a horizontally sliding bottom toolbar, freeing the workspace from the duplicate HTML rail. Stock opens a native cash/inventory summary. Settings remains a separate dialog, and upgrade images have dedicated space above or beside their text. The approved icon and save format remain unchanged.
+Build 12 keeps four fixed bottom shortcuts: Results, Rent, Upgrades and Staff. Native navigation provides Home, Stand, Recipe, Supplies and More (Marketing, Settings and Help). The Stand screen fills the workspace with scenery and live sales, revenue, profit, status, progress and serving-capacity statistics. Recipe, Supplies, Marketing and Staff now fit without split rows or cards, and the welcome footer stays visible on the cover. The approved Upgrades cards, app icon and save format are retained.
 
 ## Included
 
 Offline career and 30-day challenge, recipe and price controls, supplies, animated selling and queues, forecasts and news, equipment and staff, daily/cumulative reports, eight company slots, autosave and save import/export. The playable location selection is the original Palm roster: Suburbs, Park, Beach, Downtown and Mall.
 
-Native navigation adapts to the system: the Duo uses its sidebar and iPad uses bottom tabs. Business tabs slide horizontally along the workspace bottom. Long reports and help use explicit page controls. Landscape inner presentation places management and the complete street scene side by side; portrait gives preparation the full workspace, with a Stand button for scenery and local news. Layout follows available width and safe areas, with a brief settling delay and an explicit Auto / Cover / Inner override. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
+Native navigation adapts to the system: the Duo uses its sidebar and iPad uses bottom tabs. Four business shortcuts stay fully visible along the workspace bottom. Long reports and help use explicit page controls. Landscape inner presentation places management and the complete street scene side by side; portrait gives preparation the full workspace, with a Stand button for scenery and local news. Layout follows available width and safe areas, with a brief settling delay and an explicit Auto / Cover / Inner override. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
 
 The native UIKit/WKWebView shell serves all resources through an in-process local URL handler; no website, server, login or Internet connection is required. Rendering uses a capped 20 fps canvas. Export uses the native share sheet and writes a JSON backup to the app's Documents directory.
 
 ## Delivery
 
-The v0.2.8 prerelease includes `com.wireproof.lemonadetycoon-0.2.8-11-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
+The v0.2.9 prerelease includes `com.wireproof.lemonadetycoon-0.2.9-12-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
@@ -24,7 +24,7 @@ Then at repository root: `python3 ios/build.py device` (or `simulator`). Require
 
 ## Verification
 
-The simulation/save baseline has 99 passing tests from the earlier release. Build 11 passed 24 WebKit checks across runs (two startup timeouts passed serial rerun), including native action bridging, layouts, upgrade artwork, reports, trading and save restoration. Fresh native smoke passed on both Duo and iPad simulators, including Settings → Back → Play and Home → resume without changing saved cash. Native navigation was visually reviewed in both simulators. Physical delivery is pending because both target devices were unavailable; physical launch, runtime and visual testing were not performed.
+The simulation/save baseline has 99 passing tests from an earlier release. Build 12 passed four WebKit scenarios at cover, inner portrait/landscape and iPad sizes. They check complete preparation controls, four fixed toolbar buttons, a fully visible welcome footer, native action bridging, and non-overlapping scenery/dashboard bounds. Screenshots were visually reviewed. Native simulator launch verification stalled, so fresh native runtime testing remains pending. Duo installation and unchanged save-file hashes are verified; iPad delivery is pending availability. Physical runtime, visual and fold-transition acceptance remain pending.
 
 ## Fidelity status
 
@@ -49,10 +49,12 @@ Original Lemonade Tycoon: Hexacto. Reconstruction base: https://github.com/Gamez
 
 These captures are from development verification; appearance may differ on other devices.
 
-| Native Duo welcome | Native Duo game |
-| --- | --- |
-| ![Native welcome](docs/screenshots/native-duo-welcome.png) | ![Native game](docs/screenshots/native-duo-game.png) |
+These are WebKit layout verification captures, not physical-device screenshots.
 
-![Native iPad game](docs/screenshots/native-ipad-game.png)
+| Complete cover recipe | Complete cover welcome |
+| --- | --- |
+| ![Recipe](docs/screenshots/cover-recipe-complete.png) | ![Welcome](docs/screenshots/cover-welcome-complete.png) |
+
+![Landscape Play with live statistics](docs/screenshots/inner-play-stats.png)
 
 The release IPA is unsigned and requires your own Apple signing and provisioning.

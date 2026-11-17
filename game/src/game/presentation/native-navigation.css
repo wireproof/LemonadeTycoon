@@ -7,3 +7,84 @@
 :root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .cost-line,:root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .capacity { width:calc(50% - 8px); }
 :root.duo[data-native-navigation][data-display][data-orientation] #app #day-actions .cost-line { margin-right:12px; }
 :root[data-native-navigation] #start-menu .lobby-footer #menu-options,:root[data-native-navigation] #start-menu .lobby-footer #menu-help { display:none; }
+
+/* Business navigation is owned by the native menu; reclaim its former row. */
+:root.duo[data-native-navigation][data-display][data-orientation] #app { grid-template-rows:54px 44px minmax(0,1fr); grid-template-areas:"stock" "status" "work"; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app > .toolbar { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #price-controls legend { margin-bottom:4px; font-size:13px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #price-controls label { padding:5px 8px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #marketing-page > .intro { margin:0 0 5px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-yield .pixel-icon { width:22px; height:22px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-page > .intro { margin:0 0 4px; }
+:root[data-native-navigation] #start-menu .lobby-footer { max-height:none; overflow:visible; padding:0; flex:none; }
+:root[data-native-navigation] #start-menu .lobby-footer nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+:root[data-native-navigation] #start-menu .start-frame { gap:10px; padding:12px 16px; }
+:root[data-native-navigation] #start-menu .lobby-resume { padding:12px; }
+:root[data-native-navigation] #start-menu .mode-card { min-height:52px; }
+:root[data-native-navigation] #start-menu .lobby-footer button { flex-direction:row; justify-content:center; }
+
+/* Four fixed business shortcuts; remaining destinations live in native navigation. */
+:root.duo[data-native-navigation][data-display][data-orientation] #app { grid-template-rows:48px 38px minmax(0,1fr) 56px; grid-template-areas:"stock" "status" "work" "nav"; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app > .toolbar { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-template-rows:1fr; overflow:hidden; gap:5px; padding:3px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar button[data-page] { min-width:0; min-height:44px; width:100%; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar button[data-page="recipe"],:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar button[data-page="supplies"],:root.duo[data-native-navigation][data-display][data-orientation] #app .toolbar button[data-page="marketing"] { display:none; }
+
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .stand-dashboard,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .stand-dashboard { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:auto; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard > div { padding:10px; border:1px solid #ffffff20; border-radius:12px; background:#092e23; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard span { display:block; font-size:11px; color:#bad7ac; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard strong { display:block; font-size:17px; margin-top:3px; }
+@media(orientation:portrait),(max-width:679px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .scene-window,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .scene-window { width:min(100%,calc((var(--work-height) - 260px) * 1.25)); }
+}
+@media(orientation:landscape) and (min-width:680px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .management-column,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .management-column { display:none; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .world-column,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .world-column { grid-column:1/-1; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .world-frame,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .world-frame { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); grid-template-rows:auto auto auto auto 1fr; align-items:start; gap:12px; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .scene-window,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .scene-window { grid-column:1; grid-row:1/6; align-self:center; width:min(100%,calc((var(--work-height) - 24px) * 1.25)); }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard { grid-template-columns:repeat(2,minmax(0,1fr))!important; width:100%; }
+}
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog { grid-template-columns:1fr; gap:6px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog .management-card { grid-template-columns:48px minmax(0,1fr) 72px; grid-template-rows:auto auto; gap:3px 7px; padding:7px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog .catalog-picture { grid-column:1; grid-row:1/3; width:48px; height:58px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog h3,:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog p { grid-column:2; text-align:left; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #staff-catalog button { grid-column:3; grid-row:1/3; font-size:11px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-row { padding:0 4px; min-height:44px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-group { margin:0 0 2px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-group h3 { margin:0 0 2px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-yield { padding:2px 4px; min-height:18px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .recipe-yield .pixel-icon { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #ice-basis { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #recipe-hint { line-height:1.2; margin:3px 0; }
+
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-start { grid-column:1/-1; min-height:44px; background:#efd773; color:#153b27; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .stand-start { display:none; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app .bundle-row { padding:0; min-height:44px; }
+:root.duo[data-native-navigation][data-display][data-orientation] #app #order-summary { display:none; }
+:root[data-native-navigation] #start-menu .start-frame { gap:8px; }
+:root[data-native-navigation] #start-menu h2 { margin-bottom:6px; }
+@media(max-height:680px) {
+ :root[data-native-navigation] #start-menu .original-logo { height:48px; }
+ :root[data-native-navigation] #start-menu .menu-summary { margin-bottom:8px; }
+}
+@media(orientation:portrait),(max-width:679px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard { grid-template-columns:repeat(3,minmax(0,1fr))!important; gap:6px; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard > div { padding:6px; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard strong { font-size:14px; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app .stand-dashboard span { font-size:10px; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .scene-window,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .scene-window { width:min(100%,calc((var(--work-height) - 300px) * 1.25)); }
+}
+:root.duo[data-native-navigation][data-display][data-orientation] #app .stand-start { width:100%; margin-left:0; }
+@media(orientation:landscape) and (min-width:680px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .world-frame > :not(.scene-window),:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .world-frame > :not(.scene-window) { grid-column:2; }
+}
+@media(orientation:portrait),(max-width:679px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .world-frame > #forecast-news,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .world-frame > #forecast-news { display:none; }
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .scene-window,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .scene-window { width:min(100%,calc((var(--work-height) - 280px) * 1.25)); }
+}
+@media(orientation:landscape) and (min-width:680px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-overview="true"] .scene-window,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-phase="selling"] .scene-window { align-self:start; }
+}
+
+.stand-dashboard { display:none; }

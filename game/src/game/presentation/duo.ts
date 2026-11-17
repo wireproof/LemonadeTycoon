@@ -18,6 +18,13 @@ export function setupDuo(app: HTMLElement): void {
     app.querySelector('.toolbar')!.append(stand);
     stand.onclick = () => { const open = app.dataset.overview !== 'true'; app.dataset.overview = String(open); stand.setAttribute('aria-pressed', String(open)); };
     app.querySelector('.world-frame')!.append(app.querySelector('#forecast-news')!);
+    const dashboard=document.createElement('section'); dashboard.className='stand-dashboard'; dashboard.setAttribute('aria-label','Live stand statistics');
+    const liveFields=[['sold','Cups sold'],['revenue','Revenue'],['profit','Profit'],['world-status','Stand status'],['progress-text','Day progress'],['capacity','Ready to serve']];
+    dashboard.innerHTML=liveFields.map(([id,label])=>`<div><span>${label}</span><strong data-live-source="${id}"></strong></div>`).join('');
+    app.querySelector('.world-frame')!.append(dashboard);
+    const standStart=document.createElement('button');standStart.className='stand-start primary';standStart.textContent='Start day ▶';standStart.onclick=()=>app.querySelector<HTMLButtonElement>('#open')!.click();dashboard.append(standStart);
+
+    for(const [id] of liveFields){const source=app.querySelector('#'+id)!;const target=dashboard.querySelector(`[data-live-source="${id}"]`)!;const sync=()=>{target.textContent=id==='progress-text' && app.dataset.phase!=='selling'?'Not open':source.textContent;};new MutationObserver(sync).observe(source,{childList:true,subtree:true,characterData:true});sync();}
     const orderDock = document.createElement('div'); orderDock.className = 'order-dock';
     for (const selector of ['.order-total', '.purchase-actions']) orderDock.append(app.querySelector('#supplies-page ' + selector)!);
     content.after(orderDock);
@@ -89,7 +96,7 @@ export function setupDuo(app: HTMLElement): void {
         const available = app.querySelector<HTMLElement>('.layout')!.clientHeight;
         app.style.setProperty('--work-height', `${available}px`);
         const portrait = document.documentElement.dataset.display === 'inner' && document.documentElement.dataset.orientation === 'portrait';
-        const width = portrait ? Math.min(world.clientWidth * .58 - 24, Math.max(120, world.clientHeight - 24) * 1.25) : document.documentElement.dataset.display === 'inner'
+        const width = portrait ? Math.min(world.clientWidth - 24, Math.max(120, world.clientHeight - 150) * 1.25) : document.documentElement.dataset.display === 'inner'
             ? Math.min(world.clientWidth - 24, Math.max(120, available - 150) * 1.25)
             : Math.min(world.clientWidth - 24, 310);
         app.style.setProperty('--street-width', `${Math.max(120, width)}px`);
@@ -108,7 +115,7 @@ export function setupDuo(app: HTMLElement): void {
             const lobby = document.querySelector<HTMLElement>('#start-menu');
             const menu = Boolean(lobby && !lobby.hidden);
             const creating = document.querySelector<HTMLElement>('#menu-create');
-            const state = {menu, cash:app.querySelector('#cash')!.textContent, canBack:!menu || Boolean(document.querySelector('dialog[open]')) || Boolean(creating && !creating.hidden)};
+            const state = {menu, overview:app.dataset.overview==='true'||app.dataset.phase==='selling', dialog:Boolean(document.querySelector('dialog[open]')), view:app.dataset.view, cash:app.querySelector('#cash')!.textContent, canBack:!menu || Boolean(document.querySelector('dialog[open]')) || Boolean(creating && !creating.hidden)};
             const json = JSON.stringify(state); if (json !== priorState) { priorState = json; nativeHandler.postMessage(state); }
         };
         new MutationObserver(() => { if (!timer) timer = setTimeout(publish,200); }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','open','data-overview']});
@@ -134,7 +141,8 @@ export function setupDuo(app: HTMLElement): void {
                 if(action==='settings')openDialog(settings);
                 if(action==='help')openDialog(app.querySelector<HTMLDialogElement>('#help-dialog')!);
                 if(action==='home' && !menu)click('#main-menu');
-                if(action==='play'){if(menu)click('#menu-continue');else stand.click();}
+                if(action==='play'){if(menu)click('#menu-continue');app.dataset.overview='true';stand.setAttribute('aria-pressed','true');}
+                if(action.startsWith('page:')){if(menu)click('#menu-continue');app.dataset.overview='false';click(`[data-page="${action.slice(5)}"]`);}
             }
             setTimeout(publish,0);
         });

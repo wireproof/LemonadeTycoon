@@ -1,0 +1,1 @@
+const base=require('./playwright.native.config.cjs');module.exports={...base,webServer:{...base.webServer,command:'node node_modules/vite/bin/vite.js --config vite/config.dev.mjs --host 127.0.0.1 --port 8081 --strictPort'}};
