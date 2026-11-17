@@ -11,15 +11,15 @@
  if(Number(canvas.dataset.mapSourceWidth)<100)throw Error('Missing map texture: source width '+canvas.dataset.mapSourceWidth);
  const pixels=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
  if(!pixels.some((v,i)=>i%4!==3&&v>0))throw Error('Blank canvas');
- click('[data-page="supplies"]');
+ native('shop');await wait(()=>$('#app').dataset.workspace==='shop');
  for(const item of ['lemon','sugar','ice','cup']){click(`[data-supply="${item}"]`);click('[data-bundle="0"][data-delta="1"]');}
- click('#buy-order');click('[data-page="recipe"]');click('#open');
+ click('#buy-order');native('recipe');await wait(()=>$('#app').dataset.workspace==='recipe');native('play');await wait(()=>$('#app').dataset.workspace==='stand');const action=$('.stand-start').getBoundingClientRect();click('.stand-start');
  await wait(()=>!$('#selling').hidden);click('#skip');await wait(()=>!$('#results').hidden);
  await new Promise(r=>setTimeout(r,250));
- const action=$('#open').getBoundingClientRect();
+
  if(action.bottom>innerHeight+1||action.top<0)throw Error('Primary action clipped: '+JSON.stringify({top:action.top,bottom:action.bottom,height:innerHeight}));
  const savedCash=$('#cash').textContent;native('home');await wait(()=>!$('#start-menu').hidden);native('play');await wait(()=>$('#start-menu').hidden);if($('#cash').textContent!==savedCash)throw Error('Cash changed across native navigation');
- await wait(()=>$('.stand-dashboard').getBoundingClientRect().height>0);if($('[data-live-source="sold"]').textContent!==$('#sold').textContent)throw Error('Live sold total differs');
+ click('[data-stand="live"]');await wait(()=>$('.stand-dashboard').getBoundingClientRect().height>0);if($('[data-live-source="sold"]').textContent!==$('#sold').textContent)throw Error('Live sold total differs');
  const result={liveStatsVerified:true,nativeSettingsBackAndResume:true,nativeNavigation:document.documentElement.dataset.nativeNavigation,actionBottom:action.bottom,viewportHeight:innerHeight,passed:true,cash:$('#cash').textContent,day:$('#day').textContent,profile:document.documentElement.dataset.display,canvas:[canvas.width,canvas.height],assetsReady:canvas.dataset.assetsReady,mapWidth:canvas.dataset.mapSourceWidth,savedKeys:Object.keys(localStorage)};
  sessionStorage.setItem('native-smoke',JSON.stringify(result));
  window.webkit.messageHandlers.smoke.postMessage(result);

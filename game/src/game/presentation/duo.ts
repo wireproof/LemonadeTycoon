@@ -115,10 +115,10 @@ export function setupDuo(app: HTMLElement): void {
             const lobby = document.querySelector<HTMLElement>('#start-menu');
             const menu = Boolean(lobby && !lobby.hidden);
             const creating = document.querySelector<HTMLElement>('#menu-create');
-            const state = {menu, overview:app.dataset.overview==='true'||app.dataset.phase==='selling', dialog:Boolean(document.querySelector('dialog[open]')), view:app.dataset.view, cash:app.querySelector('#cash')!.textContent, canBack:!menu || Boolean(document.querySelector('dialog[open]')) || Boolean(creating && !creating.hidden)};
+            const state = {menu, workspace:app.dataset.workspace, overview:app.dataset.overview==='true'||app.dataset.phase==='selling', dialog:Boolean(document.querySelector('dialog[open]')), view:app.dataset.view, cash:app.querySelector('#cash')!.textContent, canBack:!menu || Boolean(document.querySelector('dialog[open]')) || Boolean(creating && !creating.hidden)};
             const json = JSON.stringify(state); if (json !== priorState) { priorState = json; nativeHandler.postMessage(state); }
         };
-        new MutationObserver(() => { if (!timer) timer = setTimeout(publish,200); }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','open','data-overview']});
+        new MutationObserver(() => { if (!timer) timer = setTimeout(publish,200); }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','open','data-overview','data-workspace']});
         const openDialog = (dialog: HTMLDialogElement) => {
             const wasHidden = app.hidden, wasInert = app.inert;
             app.hidden = false; app.inert = false;

@@ -1,0 +1,16 @@
+[WebServer] (node:76412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 2 workers
+
+(node:76419) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:76420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 382 (21.1s)
+  ✓  2 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 640 (21.1s)
+  ✓  3 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 834 (19.9s)
+  ✓  4 [webkit] › tests/browser/consolidated.spec.cjs:3:118 › five destinations 875 (19.9s)
+  ✓  5 [webkit] › tests/browser/consolidated.spec.cjs:22:1 › combined pages trade, report, navigate and retain a company (11.5s)
+
+  5 passed (1.1m)

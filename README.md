@@ -1,30 +1,30 @@
 # Lemonade Tycoon Remastered — iPhone and iPad
 
-Version 0.2.9, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
+Version 0.3.0, playable development build. An unofficial reconstruction of the first Lemonade Tycoon, guided by the user's original Palm game and community research into the first PC game. This is not recovered original source and is not an official Hexacto release.
 
-Build 12 keeps four fixed bottom shortcuts: Results, Rent, Upgrades and Staff. Native navigation provides Home, Stand, Recipe, Supplies and More (Marketing, Settings and Help). The Stand screen fills the workspace with scenery and live sales, revenue, profit, status, progress and serving-capacity statistics. Recipe, Supplies, Marketing and Staff now fit without split rows or cards, and the welcome footer stays visible on the cover. The approved Upgrades cards, app icon and save format are retained.
+Five native destinations replace the separate management pages and bottom toolbar: Menu; Stand and reports; Business (locations and staff); Shop (supplies and equipment); and Recipe & Marketing. Management pages use the full workspace. Stand has a large scene, live statistics, integrated reports and a dedicated action footer. The welcome menu is rebuilt with a company card, career/challenge choices and a separate company library. The approved app icon and save format are preserved.
 
 ## Included
 
 Offline career and 30-day challenge, recipe and price controls, supplies, animated selling and queues, forecasts and news, equipment and staff, daily/cumulative reports, eight company slots, autosave and save import/export. The playable location selection is the original Palm roster: Suburbs, Park, Beach, Downtown and Mall.
 
-Native navigation adapts to the system: the Duo uses its sidebar and iPad uses bottom tabs. Four business shortcuts stay fully visible along the workspace bottom. Long reports and help use explicit page controls. Landscape inner presentation places management and the complete street scene side by side; portrait gives preparation the full workspace, with a Stand button for scenery and local news. Layout follows available width and safe areas, with a brief settling delay and an explicit Auto / Cover / Inner override. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
+Native navigation adapts to the system: the Duo uses its sidebar and iPad uses system tabs. There is no second bottom toolbar. The combined management screens fit the tested cover and inner viewports without content paging. Layout follows usable width and safe areas, with an Auto / Cover / Inner override in Settings. The same running game and save continue across layout changes. There is no verified private fold-state API or hardware-specific geometry claim.
 
 The native UIKit/WKWebView shell serves all resources through an in-process local URL handler; no website, server, login or Internet connection is required. Rendering uses a capped 20 fps canvas. Export uses the native share sheet and writes a JSON backup to the app's Documents directory.
 
 ## Delivery
 
-The v0.2.9 prerelease includes `com.wireproof.lemonadetycoon-0.2.9-12-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
+The v0.3.0 prerelease includes `com.wireproof.lemonadetycoon-0.3.0-13-unsigned.ipa` for iPhone and iPad (iOS 16 or later). It requires your own signing before installation. Bundle ID: `com.wireproof.lemonadetycoon`; Home Screen name: Lemonade. The source includes all game graphics, audio, fonts and native icon assets.
 
 ## Build
 
 Node and npm: in `game`, run `npm ci --ignore-scripts`, `npm run typecheck`, `npm test`, `npm run build-nolog`.
 
-Then at repository root: `python3 ios/build.py device` (or `simulator`). Requires Xcode's iOS SDK. `npx playwright test --config playwright.duo.config.cjs` in `game` runs the WebKit Duo regression tests. Simulator-only `--smoke-test` launches an actual offline trading day and writes `Documents/native-smoke.json`; this hook is compiled out of device builds.
+Then at repository root: `python3 ios/build.py device` (or `simulator`). Requires Xcode's iOS SDK. `npx playwright test --config playwright.consolidated.config.cjs` in `game` runs the WebKit Duo regression tests. Simulator-only `--smoke-test` launches an actual offline trading day and writes `Documents/native-smoke.json`; this hook is compiled out of device builds.
 
 ## Verification
 
-The simulation/save baseline has 99 passing tests from an earlier release. Build 12 passed four WebKit scenarios at cover, inner portrait/landscape and iPad sizes. They check complete preparation controls, four fixed toolbar buttons, a fully visible welcome footer, native action bridging, and non-overlapping scenery/dashboard bounds. Screenshots were visually reviewed. Native simulator launch verification stalled, so fresh native runtime testing remains pending. Duo installation and unchanged save-file hashes are verified; iPad delivery is pending availability. Physical runtime, visual and fold-transition acceptance remain pending.
+Build 13 verification and device delivery are recorded in `verification/v0.3.0`. Browser layout checks cover four usable viewport sizes and exercise the five destinations. A separate trading flow checks purchasing, day-end reports, native navigation actions and save retention. The Duo native simulator passed an offline trading day, artwork readiness, five-tab navigation and save retention. The iPad native simulator installation timed out, so its fresh native runtime check remains incomplete. Duo build 13 installation and 13 unchanged save files are verified; physical iPad delivery is pending availability. Neither physical app was launched. Physical installation, runtime testing and visual acceptance are recorded separately; simulator and browser checks do not establish physical fold-transition behavior.
 
 ## Fidelity status
 
@@ -56,5 +56,9 @@ These are WebKit layout verification captures, not physical-device screenshots.
 | ![Recipe](docs/screenshots/cover-recipe-complete.png) | ![Welcome](docs/screenshots/cover-welcome-complete.png) |
 
 ![Landscape Play with live statistics](docs/screenshots/inner-play-stats.png)
+
+| Combined Shop | Business | Daily report |
+| --- | --- | --- |
+| ![Shop](docs/screenshots/cover-shop.png) | ![Business](docs/screenshots/cover-business.png) | ![Daily report](docs/screenshots/cover-daily-report.png) |
 
 The release IPA is unsigned and requires your own Apple signing and provisioning.

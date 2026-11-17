@@ -1,0 +1,17 @@
+{
+  "version": "0.3.0",
+  "build": "13",
+  "duo": {
+    "installed": true,
+    "savedFilesUnchanged": 13,
+    "launched": false,
+    "runtimeTested": false,
+    "visuallyConfirmed": false
+  },
+  "ipad": {
+    "installed": false,
+    "status": "pending availability",
+    "runtimeTested": false,
+    "visuallyConfirmed": false
+  }
+}

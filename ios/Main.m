@@ -78,7 +78,7 @@
   NSString *action=message.body[@"action"];UITabBarController *tabs=self.tabBarController;
   if([action isEqualToString:@"back"])[(id<LemonadeNavigation>)tabs sendAction:@"back"];
   else if([action isEqualToString:@"settings"]||[action isEqualToString:@"help"])[(id<LemonadeNavigation>)tabs sendAction:action];
-  else {NSDictionary *indices=@{@"home":@0,@"play":@1};NSNumber *index=indices[action];if(index){tabs.selectedIndex=index.unsignedIntegerValue;[tabs.delegate tabBarController:tabs didSelectViewController:tabs.selectedViewController];}}return;
+  else {NSDictionary *indices=@{@"home":@0,@"play":@1,@"business":@2,@"shop":@3,@"recipe":@4};NSNumber *index=indices[action];if(index){tabs.selectedIndex=index.unsignedIntegerValue;[tabs.delegate tabBarController:tabs didSelectViewController:tabs.selectedViewController];}}return;
  }
  if([message.name isEqualToString:@"smoke"]) {
  NSURL *dir=[NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
@@ -107,8 +107,8 @@
  [super viewDidLoad];self.overrideUserInterfaceStyle=UIUserInterfaceStyleDark;self.delegate=self;self.game=[LemonadeController new];
  self.view.backgroundColor=[UIColor colorWithRed:0.086 green:0.30 blue:0.15 alpha:1];self.tabBar.tintColor=[UIColor colorWithRed:0.95 green:0.83 blue:0.4 alpha:1];
  if(UIDevice.currentDevice.userInterfaceIdiom==UIUserInterfaceIdiomPad){if(@available(iOS 17.0,*))self.traitOverrides.horizontalSizeClass=UIUserInterfaceSizeClassCompact;}
- NSArray *names=@[@"Home",@"Stand",@"Recipe",@"Supplies",@"More"];
- NSArray *symbols=@[@"house",@"storefront",@"mug",@"shippingbox",@"ellipsis"];
+ NSArray *names=@[@"Menu",@"Stand",@"Business",@"Shop",@"Recipe & Marketing"];
+ NSArray *symbols=@[@"house",@"storefront",@"person.2",@"shippingbox",@"mug"];
  NSMutableArray *hosts=[NSMutableArray new];for(NSUInteger i=0;i<names.count;i++){UIViewController *host=[UIViewController new];host.view.backgroundColor=self.view.backgroundColor;host.tabBarItem=[[UITabBarItem alloc]initWithTitle:names[i] image:[UIImage systemImageNamed:symbols[i]] tag:i];UIBarButtonItem *back=[[UIBarButtonItem alloc]initWithImage:[UIImage systemImageNamed:@"chevron.backward"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];back.accessibilityLabel=@"Back";back.enabled=NO;host.navigationItem.leftBarButtonItem=back;
  UINavigationController *navigation=[[UINavigationController alloc]initWithRootViewController:host];navigation.tabBarItem=host.tabBarItem;navigation.navigationBarHidden=YES;[hosts addObject:navigation];}
  self.viewControllers=hosts;self.customizableViewControllers=nil;[self attachGame];
@@ -126,19 +126,12 @@
 - (void)goBack {[self sendAction:@"back"];}
 - (BOOL)tabBarController:(UITabBarController *)tabs shouldSelectViewController:(UIViewController *)host {return !self.game.web.loading && !self.game.presentedViewController;}
 - (void)tabBarController:(UITabBarController *)tabs didSelectViewController:(UIViewController *)host {
- [self attachGame];NSArray *actions=@[@"home",@"play",@"page:recipe",@"page:supplies",@"more"];
- if(self.selectedIndex==4){
-  UIAlertController *sheet=[UIAlertController alertControllerWithTitle:@"More" message:@"Choose a section" preferredStyle:UIAlertControllerStyleActionSheet];
-  NSArray *pages=@[@"marketing",@"settings",@"help"];
-  for(NSString *page in pages){[sheet addAction:[UIAlertAction actionWithTitle:page.capitalizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction *a){[self sendAction:[page isEqualToString:@"marketing"]?@"page:marketing":page];}]];}
-  [sheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-  sheet.popoverPresentationController.sourceView=self.tabBar;sheet.popoverPresentationController.sourceRect=self.tabBar.bounds;
-  [self.game presentViewController:sheet animated:YES completion:nil];
- }else [self sendAction:actions[self.selectedIndex]];
+ [self attachGame];NSArray *actions=@[@"home",@"workspace:stand",@"workspace:business",@"workspace:shop",@"workspace:recipe"];
+ [self sendAction:actions[self.selectedIndex]];
 }
 - (void)updateNavigationState:(NSDictionary *)state {
  for(UINavigationController *navigation in self.viewControllers){navigation.navigationBarHidden=![state[@"canBack"] boolValue];navigation.topViewController.navigationItem.leftBarButtonItem.enabled=[state[@"canBack"] boolValue];}
- if(![state[@"dialog"] boolValue]){NSString *view=state[@"view"];NSUInteger index=[state[@"menu"] boolValue]?0:([state[@"overview"] boolValue]?1:([view isEqualToString:@"recipe"]?2:([view isEqualToString:@"supplies"]?3:1)));if(self.selectedIndex!=index){self.selectedIndex=index;[self attachGame];}}
+ if(![state[@"dialog"] boolValue]){NSDictionary *indices=@{@"stand":@1,@"business":@2,@"shop":@3,@"recipe":@4};NSUInteger index=[state[@"menu"] boolValue]?0:[indices[state[@"workspace"]?:@"stand"] unsignedIntegerValue];if(self.selectedIndex!=index){self.selectedIndex=index;[self attachGame];}}
 }
 - (UIViewController *)childViewControllerForStatusBarStyle {return self.game;}
 @end

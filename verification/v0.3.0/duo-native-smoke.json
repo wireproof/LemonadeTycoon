@@ -1,0 +1,23 @@
+{
+  "nativeTabFrame": "{{397, 0}, {69, 678}}",
+  "profile": "cover",
+  "passed": true,
+  "liveStatsVerified": true,
+  "day": "06",
+  "mapWidth": "300",
+  "savedKeys": [
+    "lemonade-tycoon.reboot.save",
+    "lemonade-tycoon.reboot.backup"
+  ],
+  "cash": "$156.50",
+  "assetsReady": "true",
+  "actionBottom": 605,
+  "nativeSettingsBackAndResume": true,
+  "viewportHeight": 644,
+  "canvas": [
+    1280,
+    1024
+  ],
+  "nativeNavigation": "true",
+  "nativeTabCount": 5
+}

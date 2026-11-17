@@ -1,0 +1,20 @@
+{
+  "version": "0.3.0",
+  "build": "13",
+  "typecheck": "passed",
+  "productionWebKit": {
+    "passed": 5,
+    "viewports": [
+      "382x620",
+      "640x800",
+      "875x600",
+      "834x1047"
+    ],
+    "tradingSaveRetention": "passed"
+  },
+  "duoNativeRuntime": "passed",
+  "duoNativeScreenshot": "not captured: display selector required",
+  "ipadNativeRuntime": "not performed: simulator install timed out and existing build remained 11",
+  "physicalRuntimeTested": false,
+  "physicalVisualConfirmed": false
+}

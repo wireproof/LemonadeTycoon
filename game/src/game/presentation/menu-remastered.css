@@ -1,0 +1,52 @@
+:root #start-menu.menu-remastered.menu-remastered {background:radial-gradient(ellipse at 15% 15%,#326d40,#092d23 75%);overflow:hidden}
+:root #start-menu.menu-remastered.menu-remastered .start-frame {height:100%;min-height:0;max-width:1000px;padding:18px;display:grid;grid-template-rows:70px minmax(0,1fr) auto;gap:14px}
+:root #start-menu.menu-remastered.menu-remastered .lobby-header {display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left}
+:root #start-menu.menu-remastered.menu-remastered .original-logo {width:260px;height:66px;max-width:60%}
+:root #start-menu.menu-remastered.menu-remastered .lobby-header p {font-size:10px;letter-spacing:2px;max-width:160px;line-height:1.7;text-align:right}
+:root #start-menu.menu-remastered.menu-remastered .lobby-main {display:grid;grid-template-columns:1.4fr 1fr;gap:18px;min-height:0;align-items:stretch}
+:root #start-menu.menu-remastered.menu-remastered .lobby-resume {position:relative;display:flex;flex-direction:column;justify-content:center;border-radius:24px;padding:24px;background:linear-gradient(140deg,#234f37,#103b2a);overflow:hidden}
+:root #start-menu.menu-remastered.menu-remastered .menu-stand-art {position:absolute;right:10px;top:10px;width:40%;height:45%;opacity:.9;pointer-events:none}
+:root #start-menu.menu-remastered.menu-remastered .menu-stand-art img {width:100%;height:100%;object-fit:contain}
+:root #start-menu.menu-remastered.menu-remastered #menu-heading {display:none}
+:root #start-menu.menu-remastered.menu-remastered .menu-selection-label {color:#f0d875;letter-spacing:2px;margin-bottom:12px}
+:root #start-menu.menu-remastered.menu-remastered .menu-company-name {font-size:26px;max-width:65%;line-height:1.1;margin-bottom:12px}
+:root #start-menu.menu-remastered.menu-remastered .menu-save-details {font-size:13px;line-height:1.65}
+:root #start-menu.menu-remastered.menu-remastered .lobby-continue {margin-top:12px;min-height:52px;font-size:16px;border-radius:14px;background:#f2d675;box-shadow:none}
+:root #start-menu.menu-remastered.menu-remastered .lobby-start {display:grid;grid-template-rows:1fr 1fr;align-content:stretch;gap:12px}
+:root #start-menu.menu-remastered.menu-remastered .mode-card {display:grid;grid-template-columns:40px 1fr;align-content:center;min-height:0;padding:20px;border-radius:24px;background:#2a5937}
+:root #start-menu.menu-remastered.menu-remastered .mode-card .pixel-icon {width:38px;height:38px}
+:root #start-menu.menu-remastered.menu-remastered .mode-card b {display:none}
+:root #start-menu.menu-remastered.menu-remastered .mode-card strong {font-size:18px}
+:root #start-menu.menu-remastered.menu-remastered .mode-card small {font-size:12px;line-height:1.4}
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer {display:block;max-height:none;overflow:visible;margin:0;padding:0}
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer nav {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:none}
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer button {display:flex!important;flex-direction:row;justify-content:center;min-height:48px;font-size:12px;background:#ffffff0a;border-color:#ffffff20}
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer #menu-quit {display:none!important}
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer p {display:none}
+:root #start-menu.menu-remastered.menu-remastered dialog {width:min(560px,94vw);max-height:90dvh;padding:16px}
+:root #start-menu.menu-remastered.menu-remastered #menu-library header {display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+:root #start-menu.menu-remastered.menu-remastered #menu-library .company-list {grid-template-columns:1fr 1fr}
+:root #start-menu.menu-remastered.menu-remastered #menu-library .company-list button {min-height:62px}
+:root #start-menu.menu-remastered.menu-remastered[data-creating="true"] .menu-stand-art {display:none}
+:root #start-menu.menu-remastered.menu-remastered[data-creating="true"] .lobby-resume {overflow:auto}
+@media(max-width:649px) {
+ :root #start-menu.menu-remastered.menu-remastered .start-frame {padding:12px;grid-template-rows:54px minmax(0,1fr) 52px;gap:10px}
+ :root #start-menu.menu-remastered.menu-remastered .original-logo {height:48px;width:220px;max-width:70%}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-header p {font-size:8px;letter-spacing:1px;max-width:90px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-main {grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 92px;gap:10px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-resume {padding:16px}
+ :root #start-menu.menu-remastered.menu-remastered .menu-stand-art {width:42%;height:45%}
+ :root #start-menu.menu-remastered.menu-remastered .menu-company-name {font-size:23px}
+ :root #start-menu.menu-remastered.menu-remastered .menu-save-details {font-size:12px;line-height:1.5}
+ :root #start-menu.menu-remastered.menu-remastered .menu-selection-label {font-size:9px;margin-bottom:7px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-start {grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:8px}
+ :root #start-menu.menu-remastered.menu-remastered .mode-card {padding:10px;grid-template-columns:24px 1fr;gap:8px;border-radius:16px}
+ :root #start-menu.menu-remastered.menu-remastered .mode-card .pixel-icon {width:24px;height:24px}
+ :root #start-menu.menu-remastered.menu-remastered .mode-card strong {font-size:12px}
+ :root #start-menu.menu-remastered.menu-remastered .mode-card small {font-size:10px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-footer nav {gap:4px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-footer button {flex-direction:column;font-size:9px;gap:2px;padding:3px;min-height:48px}
+ :root #start-menu.menu-remastered.menu-remastered .lobby-footer .pixel-icon {width:20px;height:20px}
+}
+
+:root #start-menu.menu-remastered.menu-remastered .lobby-footer > nav {display:grid}

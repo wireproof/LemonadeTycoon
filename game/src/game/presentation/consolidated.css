@@ -1,0 +1,139 @@
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] {grid-template-columns:1fr;grid-template-rows:48px 38px minmax(0,1fr);grid-template-areas:"stock" "status" "work";gap:7px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .toolbar,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .workspace-pages,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #panel-title,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #day-actions,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel > #next,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel > #message,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel > #business-warning,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .daily-strip {display:none!important}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .layout {display:block;min-height:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .management-column {display:block;width:100%;height:100%}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .world-column {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="stand"] .management-column {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="stand"] .world-column {display:grid;width:100%;height:100%;grid-template-rows:36px minmax(0,1fr) auto;gap:7px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel {height:100%;padding:9px;display:flex;flex-direction:column;gap:7px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .workspace-title {font:700 18px -apple-system,sans-serif;margin:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel-scroll {flex:1;overflow:hidden;padding:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #preparation {display:grid!important;grid-template-columns:1fr 1fr;gap:16px;height:100%}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .control-page {display:none!important;min-width:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="recipe"] #recipe-page,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="recipe"] #marketing-page,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="business"] #rent-page,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="business"] #staff-page,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="shop"] #supplies-page,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-workspace="shop"] #upgrades-page {display:block!important}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .section-heading {font:600 12px -apple-system,sans-serif;color:#ead779;margin:0 0 5px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .intro {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #recipe-hint {font-size:10px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #price-controls legend {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #price-controls label {padding:4px 8px;font-size:12px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #price {height:44px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .advertising-options button {font-size:11px;padding:4px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .advertising-options .pixel-icon {width:26px;height:26px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .advertising-options small {font-size:10px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #marketing-page > .hint:last-child {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .order-dock {display:block!important;padding-top:4px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .order-total {font-size:12px;margin:0 0 3px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .purchase-actions {margin:0;gap:6px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .purchase-actions button {min-height:44px;font-size:12px;padding:4px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .supply-tabs {margin:0 0 3px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .supply-tabs button {padding:2px;font-size:10px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .supply-tabs .pixel-icon {width:24px;height:24px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .supply-tabs small {font-size:9px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row {min-height:44px;padding:0;font-size:11px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog {gap:6px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .management-card {grid-template-columns:46px minmax(0,1fr);grid-template-rows:auto auto 44px;padding:5px;gap:3px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .catalog-picture {grid-column:1;grid-row:1/3;width:46px;height:48px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog h3 {grid-column:2;font-size:11px;text-align:left}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog p {grid-column:2;font-size:9px;line-height:1.15;min-height:23px;text-align:left}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog button {grid-column:1/-1;font-size:11px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-page > .hint {font-size:10px;margin:0 0 5px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .location-list {grid-template-columns:repeat(3,minmax(0,1fr))}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .location-list button {padding:3px;min-height:44px;font-size:11px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .location-list img {height:28px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .catalog-navigation {margin:3px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details {font-size:10px;line-height:1.2;margin:3px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dt,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dd {padding:3px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-description {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-unlock,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-reservation {font-size:10px;margin:3px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-tabs {display:flex;gap:6px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-tabs button {min-height:36px;padding:4px 14px;font-size:12px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-tabs button[aria-pressed="true"] {background:#efd773;color:#173b27}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .world-frame {max-width:none;width:100%;margin:0;display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:12px;padding:10px;height:100%;min-height:0;overflow:hidden}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .world-frame > .scene-window {grid-column:1!important;grid-row:1!important;align-self:center!important;width:var(--scene-fit)!important;margin:auto}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary {grid-column:2;display:flex;flex-direction:column;justify-content:space-between;min-height:0;gap:7px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary .location-description,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary #forecast-news {font-size:11px;line-height:1.25;margin:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px;width:100%;margin:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard > div {padding:8px;border-radius:10px;background:#092e23;border:1px solid #ffffff15}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard span {display:block;font-size:10px;color:#bad7ac}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard strong {display:block;font-size:15px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions {display:flex!important;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;margin:0;min-height:62px;max-height:none;overflow:visible;background:#103525;border-radius:14px;border:1px solid #ffffff20}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-action-status {font-size:11px;line-height:1.3;max-width:65%}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions button {flex:none;min-height:44px;width:auto;margin:0;padding:8px 18px;font-size:14px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions [hidden] {display:none!important}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports {display:none;min-height:0;padding:10px;border:1px solid #ffffff20;border-radius:14px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-stand-report="true"] .world-frame {display:none!important}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace][data-stand-report="true"] .stand-reports {display:block}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #results {display:block!important}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-tabs {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-tabs button {min-height:44px;font-size:11px;padding:3px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-tabs .pixel-icon {width:24px;height:24px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-content {font-size:11px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #result-values dt,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #result-values dd {padding:3px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .intro {display:block;margin:4px 0;font-size:11px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .hint {font-size:10px}
+@media(max-width:649px) {
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #preparation {grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;gap:9px;align-content:start}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .panel {padding:7px;gap:5px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #recipe-hint {margin:3px 0}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #management-bill {margin:3px 0;font-size:10px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-catalog .management-card {padding:4px;grid-template-columns:40px minmax(0,1fr) 70px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-catalog .catalog-picture {height:44px;width:40px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-catalog p {font-size:9px;min-height:22px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-catalog h3 {font-size:11px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #staff-catalog {gap:4px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dt:nth-of-type(n+4),:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dd:nth-of-type(n+4) {display:none}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .world-frame {display:flex!important;flex-direction:column;gap:8px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary {flex:none;width:100%;gap:6px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary .location-description,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-summary #forecast-news {display:none}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard {grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard > div {padding:5px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-dashboard strong {font-size:13px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-action-status {font-size:10px;max-width:55%}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions button {padding:6px 10px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-tabs button {font-size:10px}
+ :root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-content,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #report-response {font-size:10px}
+}
+
+@media(max-width:649px) {
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dt:nth-of-type(n+3),:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-details dd:nth-of-type(n+3) {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .management-card {grid-template-rows:20px 22px 44px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .catalog-picture {height:42px}
+}
+
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions > :not([hidden]) {display:block}
+
+@media(max-width:649px) {
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #preparation {gap:5px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #rent-unlock {display:none}
+}
+
+@media(min-width:650px) {
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog {height:calc(100% - 24px);grid-template-rows:1fr 1fr}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .management-card {grid-template-columns:76px minmax(0,1fr);grid-template-rows:auto 1fr 44px;padding:10px;gap:8px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog .catalog-picture {width:76px;height:90px;align-self:center}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog h3 {font-size:15px;align-self:end}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog p {font-size:12px;align-self:start}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog button {font-size:13px}
+}
+
+@media(max-width:649px) {
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #supplies {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row {grid-template-columns:1fr;gap:0;padding:0;border:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-label {font-size:9px;line-height:12px;justify-content:center;white-space:nowrap}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-label .pixel-icon {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row > strong {text-align:center;font-size:11px;line-height:14px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row .spinner {display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row output {min-width:0;font-size:14px;border-radius:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .bundle-row .spinner button {width:44px;min-width:44px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] #upgrades-catalog {gap:4px}
+}
+
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-actions {flex-wrap:nowrap}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-action-status {flex:1;min-width:0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports .report-content {display:block}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #result-values {display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto;column-gap:8px;margin:4px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #report-commentary {font-size:11px;min-height:0;padding:0;margin:5px 0}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #report-face {display:none}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #report-commentary strong {font-size:12px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #report-commentary p {margin:3px 0;line-height:1.25;font-size:10px}
+:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #result-values dt,:root.duo[data-native-navigation][data-display][data-orientation] #app[data-workspace] .stand-reports #result-values dd {font-size:10px;line-height:1.2;padding:3px 0}

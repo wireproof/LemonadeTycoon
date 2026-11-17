@@ -1,4 +1,6 @@
 const originalLogo = new URL("../assets/original/logo.png", import.meta.url).href;
+import { standPreview } from "./stand-art";
+import "./menu-remastered.css";
 import { icon } from "./icons";
 import { decodeSave } from "../simulation/save";
 import { careerDate } from "../simulation/calendar";
@@ -67,13 +69,20 @@ export class StartMenu {
             </section>
             <details class="lobby-saves"><summary>Saved companies <span>8 slots</span></summary><div class="company-list" aria-label="Saved companies">${Array.from({length:8},(_,i)=>`<button data-company="${i}" aria-pressed="false">Empty slot</button>`).join("")}</div></details>
           </main>
-          <footer class="lobby-footer"><nav aria-label="Menu tools"><button id="menu-options">${options}<span>Options</span></button><button id="menu-help">${help}<span>Help</span></button><button id="menu-import">${disk}<span>Import save</span></button><button id="menu-credits">${credits}<span>Credits</span></button><button id="menu-quit" hidden>Quit</button></nav><p>WIREPROOF · v0.2.9</p></footer>
+          <footer class="lobby-footer"><nav aria-label="Menu tools"><button id="menu-options">${options}<span>Options</span></button><button id="menu-help">${help}<span>Help</span></button><button id="menu-import">${disk}<span>Import save</span></button><button id="menu-credits">${credits}<span>Credits</span></button><button id="menu-quit" hidden>Quit</button></nav><p>WIREPROOF · v0.3.0</p></footer>
           <dialog id="menu-credits-dialog"><h2>Lemonade Tycoon Remastered</h2><p>Original game and scenery: Hexacto / Broderbund. iPhone adaptation: WIREPROOF. Community simulation, character art and music: Gamez0 / Willow Lane Lemonade (MIT).</p><p>Original artwork extracted from your supplied game disc for this private build. Phaser: MIT. Oswald: SIL Open Font License.</p><form method="dialog"><button>Close</button></form></dialog>
         </div>`;
+        this.root.classList.add('menu-remastered');
+        const artwork=document.createElement('div');artwork.className='menu-stand-art';artwork.innerHTML=standPreview(0);this.root.querySelector('.lobby-resume')!.prepend(artwork);
+        const saves=this.root.querySelector('.lobby-saves')!;const companies=saves.querySelector('.company-list')!;
+        const library=document.createElement('dialog');library.id='menu-library';library.innerHTML='<header><h2>Your companies</h2><button type="button" class="library-close">Done</button></header>';library.append(companies);this.root.querySelector('.start-frame')!.append(library);saves.remove();
+        const libraryButton=document.createElement('button');libraryButton.id='menu-saves';libraryButton.innerHTML=`${icon("results")}<span>Companies</span>`;
+        this.root.querySelector('.lobby-footer nav')!.prepend(libraryButton);libraryButton.onclick=()=>library.showModal();library.querySelector<HTMLButtonElement>('.library-close')!.onclick=()=>library.close();
+        this.root.querySelector('#menu-options span')!.textContent='Settings';this.root.querySelector('.lobby-header p')!.textContent='A FRESH START. A BIG BUSINESS.';
         document.body.append(this.root);
         this.el("menu-challenge").title = "Earn as much as you can in 30 trading days.";
-        this.el("menu-help").onclick = hooks.help;
-        this.el("menu-options").onclick = hooks.options;
+        this.el("menu-help").onclick = () => document.documentElement.dataset.nativeNavigation ? document.dispatchEvent(new CustomEvent("lemonade:navigate",{detail:"help"})) : hooks.help();
+        this.el("menu-options").onclick = () => document.documentElement.dataset.nativeNavigation ? document.dispatchEvent(new CustomEvent("lemonade:navigate",{detail:"settings"})) : hooks.options();
         this.el("menu-quit").onclick = hooks.quit;
         this.el("menu-import").onclick = hooks.import;
         this.el("menu-inspect").onclick = () => hooks.enter(true);
@@ -94,7 +103,7 @@ export class StartMenu {
         this.el("menu-new").onclick = () => start("career");
         this.el("menu-challenge").onclick = () => start("challenge");
         this.root.querySelectorAll<HTMLButtonElement>("[data-company]").forEach(button => {
-            button.onclick = () => { this.selected = Number(button.dataset.company); this.creating = false; this.render(); };
+            button.onclick = () => { this.selected = Number(button.dataset.company); this.creating = false; this.render(); this.el<HTMLDialogElement>("menu-library").close(); };
             button.onkeydown = event => {
                 const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -2, ArrowDown: 2 }[event.key];
                 if (step === undefined && event.key !== "Home" && event.key !== "End") return;
@@ -105,7 +114,7 @@ export class StartMenu {
                 this.root.querySelector<HTMLButtonElement>(`[data-company="${this.selected}"]`)!.focus();
             };
         });
-        this.el("menu-cancel").onclick = () => { this.creating = false; this.render(); };
+        this.el("menu-cancel").onclick = () => { this.creating = false; this.render(); this.el<HTMLDialogElement>("menu-library").close(); };
         this.el<HTMLFormElement>("menu-create").onsubmit = event => {
             event.preventDefault();
             if (hooks.companies()[this.selected] && !this.el<HTMLInputElement>("menu-replace").checked) {
@@ -152,6 +161,7 @@ export class StartMenu {
         this.el<HTMLButtonElement>("menu-import").disabled = this.busy;
         this.el<HTMLButtonElement>("menu-retry").disabled = this.busy;
         this.el<HTMLButtonElement>("menu-inspect").disabled = this.busy || !this.hooks.ready();
+        this.root.dataset.creating=String(this.creating);
         this.el("menu-create").hidden = !this.creating;
         this.el("menu-company-info").hidden = this.creating;
         this.el("menu-continue").hidden = this.creating;

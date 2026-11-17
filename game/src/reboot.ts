@@ -51,6 +51,7 @@ import "./game/presentation/style.css";
 import "./game/presentation/duo.css";
 import "./game/presentation/rail.css";
 import "./game/presentation/native-navigation.css";
+import { setupConsolidated } from "./game/presentation/consolidated";
 import { setupDuo } from "./game/presentation/duo";
 
 const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
@@ -111,6 +112,7 @@ let savedSnapshot: string | null = null;
 const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerHTML = markup;
 setupDuo(app);
+setupConsolidated(app);
 if (desktopSave) fitDesktopMap(app);
 desktopSave?.onFlush(async (request = true) => {
     closing = request;
